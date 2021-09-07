@@ -3,7 +3,8 @@ import './Input.css';
 
 
 class Input extends React.Component {
-  
+  static #defaultClassNames = 'input';
+
   constructor(props) {
     super(props);
     this.handleChange = this.handleChange.bind(this);
@@ -16,25 +17,20 @@ class Input extends React.Component {
   }
 
   handleDoubleClick(e) {
-    console.log('double click', e.target.nodeName, this);
-    //e.target.select()
     this.inputField.current.select();
   }
 
   render() {
-    let className = "input";
-
-    if (this.props.disabled) {
-      className += " disabled";
-    }
+    let className = (this.props.disabled) ? 'disabled' : '';
 
     return (
       <label
-        className={className}
+        className={Input.#defaultClassNames + ' ' + className}
         onDoubleClick={this.handleDoubleClick}>
 
         <input
-          type={this.props.type || "number"}
+          type={this.props.type ?? 'number'}
+          step={this.props.step}
           id={this.props.id}
           disabled={this.props.disabled}
           defaultValue={this.props.value}
@@ -48,4 +44,5 @@ class Input extends React.Component {
     );
   }
 }
+
 export default Input;

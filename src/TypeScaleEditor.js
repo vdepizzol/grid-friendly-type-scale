@@ -7,28 +7,20 @@ class TypeScaleEditor extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-
     }
+
+    this.handleInputChange = this.handleInputChange.bind(this);
+
+  }
+
+  handleInputChange(e, id, name, value) {
+    this.props.onChange(id, name, value);
   }
 
   render() {
 
     const typeScale = this.props.typeScale;
     const listItems = typeScale.map((typeScaleItem) => {
-
-      const handleSizeChange = (value) => {
-        this.props.onChange(typeScaleItem.id, 'size', value);
-      }
-
-      const handleTitleChange = (value) => {
-        this.props.onChange(typeScaleItem.id, 'title', value);
-      }
-
-      const handleLineHeightChange = (value) => {
-        console.log('WHAT');
-        this.props.onChange(typeScaleItem.id, 'adjustedLineHeight', value);
-        return value;
-      }
 
       let step = this.props.gridSize;
 
@@ -40,36 +32,54 @@ class TypeScaleEditor extends React.Component {
       <tr key={typeScaleItem.id}>
         <td>
           <VInputField
+            key={typeScaleItem.id + '_size'}
+            name={'typeScale[' + typeScaleItem.id + '][size]'}
+            onChange={e => {
+              this.handleInputChange(e, typeScaleItem.id, 'size', e.target.value);
+            }}
             value={typeScaleItem.size}
-            onChange={handleSizeChange}
             suffix="px" />
         </td>
         <td>
           <VInputField
+            key={typeScaleItem.id + '_title'}
+            name={'typeScale[' + typeScaleItem.id + '][title]'}
             type="text"
-            onChange={handleTitleChange}
-            value={typeScaleItem.title} />
+            value={typeScaleItem.title}
+            onChange={e => {
+              this.handleInputChange(e, typeScaleItem.id, 'title', e.target.value);
+            }} />
         </td>
         <td>
           <div style={{display: 'grid', gridAutoFlow: 'column', gap: 4}}>
             <VInputField
+              key={typeScaleItem.id + '_computedLineHeight'}
+              name={'typeScale[' + typeScaleItem.id + '][computedLineHeight]'}
               type="number"
               disabled
               isVisible={!this.props.snapToggle}
+              onChange={e => {
+                this.handleInputChange(e, typeScaleItem.id, 'computedLineHeight', e.target.value);
+              }}
               value={typeScaleItem.computedLineHeight}
-              suffix="xo" />
+              suffix="px" />
 
             <VInputField
+              key={typeScaleItem.id + '_adjustedLineHeight'}
+              name={'typeScale[' + typeScaleItem.id + '][adjustedLineHeight]'}
               type="number"
               step={step}
-              onChange={handleLineHeightChange}
+              onChange={e => {
+                this.handleInputChange(e, typeScaleItem.id, 'adjustedLineHeight', e.target.value);
+              }}
               value={typeScaleItem.adjustedLineHeight}
-              suffix="a:2" />
+              suffix="px" />
           </div>
         </td>
       </tr>
       );
     });
+
     return (
       <table>
         <thead>

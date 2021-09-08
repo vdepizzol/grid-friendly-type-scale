@@ -13,7 +13,7 @@ class VInputField extends React.Component {
   }
 
   handleChange(e) {
-    this.props.onChange(e.target.value);
+    this.props.onChange(e);
   }
 
   handleDoubleClick(e) {
@@ -31,6 +31,7 @@ class VInputField extends React.Component {
         onDoubleClick={this.handleDoubleClick}>
 
         <input
+          name={this.props.name}
           type={this.props.type ?? 'number'}
           step={this.props.step}
           id={this.props.id}

@@ -4,9 +4,9 @@
   max-width: 8ch;
   position: relative;
   font-size: 14px;
-  border: var(--VInputField-border-width) solid #ccc;
+  border: var(--VInputField-border-width) solid var(--ui-border);
   border-radius: 6px;
-  background: #fff;
+  background: var(--ui-high);
   display: grid;
   grid-auto-flow: column;
   gap: 4px;
@@ -16,7 +16,7 @@
   opacity: 0.25;
 }
 .VInputField.disabled {
-  background: #ccc;
+  background: var(--ui-low);
 }
 .VInputField.fullWidth {
   width: 100%;
@@ -24,7 +24,7 @@
 }
 
 .VInputField:focus-within {
-  border-color: #333;
+  border-color: var(--ui-focus);
 }
 
 .VInputField input {
@@ -40,6 +40,9 @@
     -webkit-appearance: none;
     margin: 0;
 }
+.VInputField input::-webkit-calendar-picker-indicator {
+  display: none !important;
+}
 
 .VInputField input:focus {
   outline: none;
@@ -50,7 +53,7 @@
 
 .VInputField .suffix {
   padding-right: 4px;
-  color: #999;
+  color: var(--base-low);
   cursor: text;
   user-select: none;
 }

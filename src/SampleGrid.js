@@ -22,6 +22,7 @@ class SampleGrid extends React.Component {
 
   render() {
     const gridSize = this.props.gridSize;
+    const fontFamily = this.props.fontFamily;
 
     const style = {
       backgroundSize: gridSize + "px " + gridSize + "px",
@@ -31,15 +32,17 @@ class SampleGrid extends React.Component {
     const lipsum = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras mattis, erat in convallis sollicitudin, tellus felis euismod urna, in vestibulum lacus nulla consequat mi. In ut viverra dolor, eu varius nisi. Morbi fermentum iaculis sagittis. Sed ut mi neque. Phasellus ornare arcu faucibus tincidunt lacinia. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Vestibulum molestie vestibulum elit, in porta ex mattis vel.';
 
     const listItems = this.props.typeScale.map((typeScaleItem) => {
+      // FIXME
       const style = {
         fontSize: typeScaleItem.size + 'px',
+        fontFamily: fontFamily,
         lineHeight: typeScaleItem.adjustedLineHeight + 'px',
-        backgroundColor: 'rgba(255, 0, 0, 0.1)',
-        marginBottom: 'calc(' + (this.props.gridSize * 2) + 'px - 1px)',
+        backgroundColor: (this.state.showGrid) ? 'rgba(255, 0, 0, 0.1)' : 'transparent',
+        marginBottom: (this.state.showGrid) ? 'calc(' + (this.props.gridSize * 2) + 'px - 1px)' : (this.props.gridSize * 2),
 
         backgroundSize: typeScaleItem.adjustedLineHeight + "px " + typeScaleItem.adjustedLineHeight + "px",
-        backgroundImage: "linear-gradient(to bottom, red 1px, transparent 1px)",
-        borderBottom: '1px solid red'
+        backgroundImage: (this.state.showGrid) ? "linear-gradient(to bottom, red 1px, transparent 1px)" : 'none',
+        borderBottom: (this.state.showGrid) ? '1px solid red' : 'transparent'
       };
       return (
         <div key={typeScaleItem.id} style={style}>

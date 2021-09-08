@@ -2,27 +2,44 @@
 
   --base-high: rgba(0, 0, 0, 0.9);
   --base-medium: rgba(0, 0, 0, 0.55);
-  --base-low: rgba(0, 0, 0, 0.38);
+  --base-low: rgba(0, 0, 0, 0.48);
   
   --chrome-high: #ececec;
   --chrome-medium: #f4f4f4;
   --chrome-low: white;
 
   --ui-high: #fff;
-  --ui-low: #ececec;
-  --ui-border: #bdbdbd;
+  --ui-medium: #ececec;
+  --ui-low: #ccc;
+  --ui-border: #aaa;
+  --ui-focus: #333;
 
   --accent: blue;
-  
+
+  --scale-4: 4px;
+  --scale-8: 8px;
+  --scale-12: 12px;
+  --scale-16: 16px;
+
+
+  /*
+  --ui-high: #fff;
+  --ui-medium: #ffd5d5;
+  --ui-low: rgb(255, 131, 131);
+  --ui-border: #ff6262;
+  --ui-focus: #333;
+  */
 }
 
 body {
-  margin: 16px;
+  margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
 
   font-size: 14px;
+  color: var(--base-high);
+  background: var(--chrome-low);
 }
 
 code {

@@ -1,5 +1,10 @@
 .VLabel {
   user-select: none;
+  margin-bottom: var(--scale-8);
+}
+
+.VLabel .VInputField {
+  margin-top: var(--scale-4);
 }
 
 .VLabel.fullWidth {

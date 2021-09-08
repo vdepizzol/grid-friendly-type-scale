@@ -242,7 +242,8 @@ class App extends React.Component {
         <section className="App-output">
           <SampleGrid
             gridSize={this.state.gridSize}
-            typeScale={this.state.typeScale} />
+            typeScale={this.state.typeScale}
+            fontFamily={this.state.fontFamily} />
         </section>
 
         <section className="App-about">

@@ -1,13 +1,30 @@
 import React from 'react';
 
 class SampleGrid extends React.Component {
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      showGrid: true
+    };
+
+    this.handleShowGridChange = this.handleShowGridChange.bind(this);
+  }
+
+  handleShowGridChange() {
+    const showGrid = !this.state.showGrid;
+
+    this.setState({
+      showGrid: showGrid
+    });
+  }
+
   render() {
     const gridSize = this.props.gridSize;
 
     const style = {
       backgroundSize: gridSize + "px " + gridSize + "px",
-      backgroundImage: "linear-gradient(to bottom, #ccc 1px, transparent 1px)",
-      overflow: 'auto',
       padding: (gridSize * 4) + 'px'
     };
 
@@ -30,13 +47,21 @@ class SampleGrid extends React.Component {
         </div>
       );
     });
+    
+    let className = (this.state.showGrid) ? 'show-grid' : '';
 
     return (
-      <div
-        className="sample-grid"
-        style={style}
-      >
-        {listItems}
+      <div>
+        <input
+          type="checkbox"
+          onChange={this.handleShowGridChange }
+          checked={this.state.showGrid} />
+        <div
+          className={ "sample-grid " + className }
+          style={style}
+        >
+          {listItems}
+        </div>
       </div>
     );
   }

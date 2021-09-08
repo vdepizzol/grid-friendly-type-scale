@@ -54,8 +54,6 @@ class App extends React.Component {
     this.setState({
       snapToggle: snap
     });
-
-    //this.computeLineHeights();
     
     if (snap === true) {
       console.log('snapped');
@@ -80,7 +78,6 @@ class App extends React.Component {
       this.setState(state => {
         const typeScale = state.typeScale.map((item) => {
           item['adjustedLineHeight'] = item['computedLineHeight'];
-          console.log(item);
           return item;
         });
         return { typeScale: typeScale };
@@ -115,8 +112,6 @@ class App extends React.Component {
   handleTypeScaleEditorChange(id, key, value) {
     const defaultLineHeight = this.state.defaultLineHeight;
 
-    console.log(id, key, value);
-
     this.setState(state => {
       const typeScale = state.typeScale.map((item, i) => {
         if (id === i) {
@@ -145,31 +140,17 @@ class App extends React.Component {
   computeLineHeights(newLineHeight, newGridSize) {
     const defaultLineHeight = newLineHeight ?? this.state.defaultLineHeight;
     const gridSize = newGridSize ?? this.state.gridSize;
-
-    console.log(defaultLineHeight, gridSize);
-
+    
     this.setState(state => {
       const typeScale = state.typeScale.map((item) => {
         const computedLineHeight = this.computeDefaultLineHeight(item['size'], defaultLineHeight);
         item['computedLineHeight'] = computedLineHeight;
         item['adjustedLineHeight'] = this.roundToGrid(computedLineHeight, gridSize);
-        console.log('well', item);
         return item;
       });
       return { typeScale: typeScale };
     });
   }
-
-  /*
-
-    this.state.typeScale.map((typeScaleItem) => {
-
-    });
-    /*this.setState({
-      typeScale: value
-    });
-  }
-  */
 
   render() {
 

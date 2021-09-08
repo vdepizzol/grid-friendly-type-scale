@@ -4,14 +4,7 @@ import './VLabel.css';
 class VLabel extends React.Component {
   static #defaultClassNames = 'VLabel';
 
-  /*
-  constructor(props) {
-    super(props);
-  }
-  */
-
   render() {
-
     let labelCheckbox = (this.props.type === 'toggle') ? (
       <input
         type="checkbox"

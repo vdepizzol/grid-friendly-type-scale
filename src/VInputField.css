@@ -47,6 +47,9 @@
 .VInputField input:focus {
   outline: none;
 }
+.VInputField input:invalid {
+  color: var(--base-invalid);
+}
 
 
 

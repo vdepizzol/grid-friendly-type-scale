@@ -3,6 +3,7 @@
   --base-high: rgba(0, 0, 0, 0.9);
   --base-medium: rgba(0, 0, 0, 0.55);
   --base-low: rgba(0, 0, 0, 0.48);
+  --base-invalid: red;
   
   --chrome-high: #ececec;
   --chrome-medium: #f4f4f4;

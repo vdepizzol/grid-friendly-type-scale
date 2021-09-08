@@ -9,14 +9,23 @@ class TypeScaleEditor extends React.Component {
   constructor(props) {
     super(props);
     this.handleInputChange = this.handleInputChange.bind(this);
+    this.adjustLineHeight = this.adjustLineHeight.bind(this);
+
   }
 
   handleInputChange(e, id, name, value) {
     this.props.onChange(id, name, value);
   }
 
-  render() {
+  adjustLineHeight(e, id, operation) {
+    const step = this.props.gridSize;
+    const currentValue = this.props.typeScale[id].adjustedLineHeight;
+    const newValue = (operation === 'add') ? currentValue + step : currentValue - step;
 
+    this.props.onChange(id, 'adjustedLineHeight', newValue);
+  }
+
+  render() {
     const typeScale = this.props.typeScale;
     const listItems = typeScale.map((typeScaleItem) => {
 
@@ -72,6 +81,18 @@ class TypeScaleEditor extends React.Component {
               }}
               value={typeScaleItem.adjustedLineHeight}
               suffix="px" />
+            
+            <button
+              className="tempBtn"
+              onClick={e => {
+                this.adjustLineHeight(e, typeScaleItem.id, 'add');
+              }}>+</button>
+            
+            <button
+              className="tempBtn"
+              onClick={e => {
+                this.adjustLineHeight(e, typeScaleItem.id, 'substract');
+              }}>&minus;</button>
           </div>
         </td>
       </tr>

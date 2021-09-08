@@ -23,6 +23,8 @@ class VInputField extends React.Component {
   render() {
     let className = (this.props.disabled) ? 'disabled' : '';
 
+    className += (this.props.isVisible) ? ' hidden' : '';
+
     return (
       <label
         className={VInputField.#defaultClassNames + ' ' + className}

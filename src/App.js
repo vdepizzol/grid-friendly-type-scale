@@ -23,7 +23,7 @@ class App extends React.Component {
         {id: 1, size: 14, title: "Body 1", computedLineHeight: null, adjustedLineHeight: null},
         {id: 2, size: 16, title: "Body 2"},
         {id: 3, size: 18, title: "Subtitle"},
-        {id: 4, size: 20, title: "Subtitle"}
+        {id: 4, size: 20, title: "Title"}
       ]
     }
 
@@ -48,16 +48,36 @@ class App extends React.Component {
   }
 
   handleSnapToggleChange(value) {
+    const snap = !this.state.snapToggle;
+
     this.setState({
-      snapToggle: !this.state.snapToggle
+      snapToggle: snap
     });
 
-    // if disabled, adjusted LH = computed LH;
+    //this.computeLineHeights();
+    
+    if (snap === true) {
+      console.log('snapped');
+      this.computeLineHeights();
+    } else {
+      console.log('not snapped');
+      this.computeLineHeights(null, 1);
 
-    // else, computed LHs again
+      /*
+      // Reset adjustedLineHeight to be equal to computedLineHeight
+      this.setState(state => {
+        const typeScale = state.typeScale.map((item) => {
+          item['adjustedLineHeight'] = item['computedLineHeight'];
+          return item;
+        });
+        return { typeScale: typeScale };
+      });
+      */
+    }
   }
 
   handleGridSizeChange(value) {
+    console.log('grid size changed');
     this.setState({
       gridSize: value
     });
@@ -106,7 +126,8 @@ class App extends React.Component {
     const defaultLineHeight = newLineHeight ?? this.state.defaultLineHeight;
     const gridSize = newGridSize ?? this.state.gridSize;
 
-    console.log('new lh', defaultLineHeight, gridSize);
+    console.log(defaultLineHeight, gridSize);
+
     this.setState(state => {
       const typeScale = state.typeScale.map((item) => {
         const computedLineHeight = item['size'] * defaultLineHeight
@@ -178,7 +199,9 @@ class App extends React.Component {
             gridSize={this.state.gridSize} />
         </section>
         <section className="App-output">
-          <SampleGrid gridSize={this.state.gridSize} />
+          <SampleGrid
+            gridSize={this.state.gridSize}
+            typeScale={this.state.typeScale} />
         </section>
 
         <section className="App-about">

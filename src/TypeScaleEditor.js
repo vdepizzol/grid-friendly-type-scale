@@ -11,7 +11,9 @@ class TypeScaleEditor extends React.Component {
   */
 
   render() {
+
     const typeScale = this.props.typeScale;
+    console.log('rerender editor', typeScale);
     const listItems = typeScale.map((typeScaleItem) => {
 
       const handleSizeChange = (value) => {
@@ -24,7 +26,6 @@ class TypeScaleEditor extends React.Component {
 
       const handleAdjustedLineHeightChange = (value) => {
         this.props.onChange(typeScaleItem.id, 'adjustedLineHeight', value);
-        console.log(value)
         return value;
       }
 
@@ -43,24 +44,29 @@ class TypeScaleEditor extends React.Component {
             value={typeScaleItem.title} />
         </td>
         <td>
-          {this.props.snapToggle
-            ? <VInputField
-                type="text"
-                disabled
-                onChange={handleTitleChange}
-                value={typeScaleItem.computedLineHeight} />
-            : <VInputField
-                type="text"
-                onChange={handleAdjustedLineHeightChange}
-                value={typeScaleItem.adjustedLineHeight} />
-          }
-        </td>
-        <td>
-          <VInputField
-            type="number"
-            step={this.props.gridSize}
-            onChange={handleAdjustedLineHeightChange}
-            value={typeScaleItem.adjustedLineHeight} />
+          <div style={{display: 'grid', gridAutoFlow: 'column', gap: 4}}>
+            <VInputField
+              isVisible={!this.props.snapToggle}
+              type="text"
+              disabled
+              value={typeScaleItem.computedLineHeight}
+              suffix="c:1" />
+
+            <VInputField
+              isVisible={!this.props.snapToggle}
+              type="number"
+              step={this.props.gridSize}
+              onChange={handleAdjustedLineHeightChange}
+              value={typeScaleItem.adjustedLineHeight}
+              suffix="a:2" />
+
+            <VInputField
+              isVisible={this.props.snapToggle}
+              type="number"
+              onChange={handleAdjustedLineHeightChange}
+              value={typeScaleItem.adjustedLineHeight}
+              suffix="a:3" />
+          </div>
         </td>
       </tr>
       );
@@ -71,8 +77,7 @@ class TypeScaleEditor extends React.Component {
           <tr>
             <th>Size:</th>
             <th>Title:</th>
-            <th>Adjusted lh:</th>
-            <th>Computed lh:</th>
+            <th>Adjusted line height:</th>
           </tr>
         </thead>
         <tbody>

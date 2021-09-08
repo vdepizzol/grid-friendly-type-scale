@@ -1,7 +1,7 @@
 .input {
   --input-border-width: 2px;
 
-  max-width: 12ch;
+  max-width: 8ch;
   position: relative;
   font-size: 14px;
   border: var(--input-border-width) solid #ccc;

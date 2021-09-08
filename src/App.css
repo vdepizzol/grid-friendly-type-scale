@@ -1,3 +1,21 @@
+.App {
+  display: grid;
+  grid-template-columns: 320px 1fr 400px;
+  grid-auto-flow: column;
+  gap: 16px;
+  height: calc(100vh - 32px);
+}
+
+.App section {
+  background: #ececec;
+  padding: 20px;
+  margin-bottom: 16px;
+  border-radius: 6px;
+}
+
+.App .App-panel {
+}
+
 /*
 .App {
   text-align: center;

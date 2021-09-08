@@ -1,8 +1,8 @@
 import React from 'react';
-import './Input.css';
+import './VInputField.css';
 
 
-class Input extends React.Component {
+class VInputField extends React.Component {
   static #defaultClassNames = 'input';
 
   constructor(props) {
@@ -25,7 +25,7 @@ class Input extends React.Component {
 
     return (
       <label
-        className={Input.#defaultClassNames + ' ' + className}
+        className={VInputField.#defaultClassNames + ' ' + className}
         onDoubleClick={this.handleDoubleClick}>
 
         <input
@@ -35,6 +35,7 @@ class Input extends React.Component {
           disabled={this.props.disabled}
           defaultValue={this.props.value}
           onChange={this.handleChange}
+          placeholder={this.props.placeholder}
           ref={this.inputField} />
 
         {this.props.suffix &&
@@ -45,4 +46,4 @@ class Input extends React.Component {
   }
 }
 
-export default Input;
+export default VInputField

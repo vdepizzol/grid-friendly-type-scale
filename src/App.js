@@ -177,41 +177,60 @@ class App extends React.Component {
       <div className="App">
         <section className="App-panel">
 
-          <VLabel id="base-font" title="Base size">
-            <VInputField
-                id="base-font"
-                onChange={this.handleBaseFontChange}
-                value={this.state.baseFont}
+          <h2>Typographic structure</h2>
+
+          <div className="VRow">
+            <VLabel id="base-font" title="Base size">
+              <VInputField
+                  id="base-font"
+                  onChange={this.handleBaseFontChange}
+                  value={this.state.baseFont}
+                  suffix="px" />
+            </VLabel>
+
+            <VLabel
+              title="Snap to"
+              type="toggle"
+              onChange={this.handleSnapToggleChange}
+              checked={this.state.snapToggle}>
+              <VInputField
+                id="base-grid"
+                disabled={!this.state.snapToggle}
+                onChange={this.handleGridSizeChange}
+                value={this.state.gridSize}
                 suffix="px" />
-          </VLabel>
+            </VLabel>
+
+            <VLabel
+              id="line-height"
+              title="Default line height">
+              <VInputField id="line-height"
+                  step="0.1"
+                  onChange={this.handleDefaultLineHeightChange}
+                  value={this.state.defaultLineHeight} />
+            </VLabel>
+          </div>
 
           <VLabel
-            title="Snap to"
-            type="toggle"
-            onChange={this.handleSnapToggleChange}
-            checked={this.state.snapToggle}>
-            <VInputField
-              id="base-grid"
-              disabled={!this.state.snapToggle}
-              onChange={this.handleGridSizeChange}
-              value={this.state.gridSize}
-              suffix="px" />
-          </VLabel>
-
-          <VLabel id="line-height" title="Default line height">
-            <VInputField id="line-height"
-                step="0.1"
-                onChange={this.handleDefaultLineHeightChange}
-                value={this.state.defaultLineHeight} />
-          </VLabel>
-
-          <VLabel id="font-family" title="Font family">
+            id="font-family"
+            title="Font family"
+            fullWidth={true}>
             <VInputField
                 type="text"
                 id="font-family"
                 onChange={this.handleFontFamilyChange}
+                list="fontFamilySuggestions"
                 value={this.state.fontFamily} />
           </VLabel>
+
+          <datalist id="fontFamilySuggestions">
+            <option value="-apple-system,BlinkMacSystemFont,Segoe UI Variable Text,Segoe UI,Meiryo,system-ui,ui-sans-serif,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji" />
+            <option value="sans-serif" />
+          </datalist>
+
+          <h2 style={{
+            marginTop: 16
+          }}>Type scale</h2>
 
           <TypeScaleEditor
             typeScale={this.state.typeScale}

@@ -1,3 +1,13 @@
 .VLabel {
   user-select: none;
 }
+
+.VLabel.fullWidth {
+  width: 100%;
+}
+
+.VLabel.fullWidth .VInputField {
+  width: 100%;
+  max-width: none;
+  box-sizing: border-box;
+}

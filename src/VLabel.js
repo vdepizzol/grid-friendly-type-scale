@@ -19,8 +19,10 @@ class VLabel extends React.Component {
         checked={this.props.checked} />
     ) : '';
 
+    let className = (this.props.fullWidth) ? 'fullWidth' : '';
+
     return (
-      <div className={VLabel.#defaultClassNames}>
+      <div className={ VLabel.#defaultClassNames + ' ' + className}>
         <label htmlFor={this.props.id}>
           {labelCheckbox}
           {this.props.title}:

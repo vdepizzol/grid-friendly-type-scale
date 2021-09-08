@@ -3,7 +3,7 @@ import './VInputField.css';
 
 
 class VInputField extends React.Component {
-  static #defaultClassNames = 'input';
+  static #defaultClassNames = 'VInputField';
 
   constructor(props) {
     super(props);
@@ -22,8 +22,8 @@ class VInputField extends React.Component {
 
   render() {
     let className = (this.props.disabled) ? 'disabled' : '';
-
     className += (this.props.isVisible) ? ' hidden' : '';
+    className += (this.props.className) ? (' ' + this.props.className) : '';
 
     return (
       <label
@@ -39,6 +39,7 @@ class VInputField extends React.Component {
           defaultValue={this.props.value}
           onChange={this.handleChange}
           placeholder={this.props.placeholder}
+          list={this.props.list}
           ref={this.inputField} />
 
         {this.props.suffix &&

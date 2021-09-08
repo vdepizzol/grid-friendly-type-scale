@@ -1,3 +1,11 @@
-table {
-  border: 1px solid red;
+.TypeScaleEditor {
+}
+
+.TypeScaleEditor thead, .TypeScaleEditor th {
+  text-align: left;
+  font-weight: normal;
+}
+
+.TypeScaleEditor td {
+  padding: 0 8px 4px 0;
 }

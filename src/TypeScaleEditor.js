@@ -3,6 +3,8 @@ import VInputField from './VInputField';
 import './TypeScaleEditor.css';
 
 class TypeScaleEditor extends React.Component {
+  static #defaultClassNames = 'TypeScaleEditor';
+
 
   constructor(props) {
     super(props);
@@ -81,7 +83,7 @@ class TypeScaleEditor extends React.Component {
     });
 
     return (
-      <table>
+      <table className={TypeScaleEditor.#defaultClassNames}>
         <thead>
           <tr>
             <th>Size:</th>

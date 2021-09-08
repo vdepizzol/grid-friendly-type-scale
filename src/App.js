@@ -34,6 +34,7 @@ class App extends React.Component {
     this.handleFontFamilyChange = this.handleFontFamilyChange.bind(this);
 
     this.handleTypeScaleEditorChange = this.handleTypeScaleEditorChange.bind(this);
+    this.computeDefaultLineHeight = this.computeDefaultLineHeight.bind(this);
     this.computeLineHeights = this.computeLineHeights.bind(this);
   }
 
@@ -59,20 +60,31 @@ class App extends React.Component {
     if (snap === true) {
       console.log('snapped');
       this.computeLineHeights();
-    } else {
-      console.log('not snapped');
-      this.computeLineHeights(null, 1);
 
+      // Reset computedLineHeight
       /*
-      // Reset adjustedLineHeight to be equal to computedLineHeight
       this.setState(state => {
         const typeScale = state.typeScale.map((item) => {
-          item['adjustedLineHeight'] = item['computedLineHeight'];
+          console.log('@', item['size'], this.props.defaultLineHeight);
+          item['computedLineHeight'] = this.computeDefaultLineHeight(item['size'], this.state.defaultLineHeight);
           return item;
         });
         return { typeScale: typeScale };
       });
       */
+    } else {
+      console.log('not snapped');
+      //this.computeLineHeights(null, 1);
+
+      // Reset adjustedLineHeight to be equal to computedLineHeight
+      this.setState(state => {
+        const typeScale = state.typeScale.map((item) => {
+          item['adjustedLineHeight'] = item['computedLineHeight'];
+          console.log(item);
+          return item;
+        });
+        return { typeScale: typeScale };
+      });
     }
   }
 
@@ -104,7 +116,6 @@ class App extends React.Component {
       const typeScale = state.typeScale.map((item, i) => {
         if (id === i) {
           item[key] = value;
-
           if (key === 'size') {
             const computedLineHeight = item['size'] * defaultLineHeight
             item['computedLineHeight'] = computedLineHeight;
@@ -122,6 +133,10 @@ class App extends React.Component {
     return Math.round(number / gridSize) * gridSize;
   }
 
+  computeDefaultLineHeight(fontSize, lineHeight) {
+    return fontSize * lineHeight;
+  }
+
   computeLineHeights(newLineHeight, newGridSize) {
     const defaultLineHeight = newLineHeight ?? this.state.defaultLineHeight;
     const gridSize = newGridSize ?? this.state.gridSize;
@@ -130,9 +145,10 @@ class App extends React.Component {
 
     this.setState(state => {
       const typeScale = state.typeScale.map((item) => {
-        const computedLineHeight = item['size'] * defaultLineHeight
+        const computedLineHeight = this.computeDefaultLineHeight(item['size'], defaultLineHeight);
         item['computedLineHeight'] = computedLineHeight;
         item['adjustedLineHeight'] = this.roundToGrid(computedLineHeight, gridSize);
+        console.log(item);
         return item;
       });
       return { typeScale: typeScale };
@@ -197,6 +213,7 @@ class App extends React.Component {
             onChange={this.handleTypeScaleEditorChange}
             snapToggle={this.state.snapToggle}
             gridSize={this.state.gridSize} />
+
         </section>
         <section className="App-output">
           <SampleGrid

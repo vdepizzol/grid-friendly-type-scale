@@ -3,17 +3,17 @@ import VInputField from './VInputField';
 import './TypeScaleEditor.css';
 
 class TypeScaleEditor extends React.Component {
-  
-  /*
+
   constructor(props) {
     super(props);
+    this.state = {
+
+    }
   }
-  */
 
   render() {
 
     const typeScale = this.props.typeScale;
-    console.log('rerender editor', typeScale);
     const listItems = typeScale.map((typeScaleItem) => {
 
       const handleSizeChange = (value) => {
@@ -24,9 +24,16 @@ class TypeScaleEditor extends React.Component {
         this.props.onChange(typeScaleItem.id, 'title', value);
       }
 
-      const handleAdjustedLineHeightChange = (value) => {
+      const handleLineHeightChange = (value) => {
+        console.log('WHAT');
         this.props.onChange(typeScaleItem.id, 'adjustedLineHeight', value);
         return value;
+      }
+
+      let step = this.props.gridSize;
+
+      if (!this.props.snapToggle) {
+        step = 1;
       }
 
       return (
@@ -46,26 +53,18 @@ class TypeScaleEditor extends React.Component {
         <td>
           <div style={{display: 'grid', gridAutoFlow: 'column', gap: 4}}>
             <VInputField
-              isVisible={!this.props.snapToggle}
-              type="text"
+              type="number"
               disabled
+              isVisible={!this.props.snapToggle}
               value={typeScaleItem.computedLineHeight}
-              suffix="c:1" />
+              suffix="xo" />
 
             <VInputField
-              isVisible={!this.props.snapToggle}
               type="number"
-              step={this.props.gridSize}
-              onChange={handleAdjustedLineHeightChange}
+              step={step}
+              onChange={handleLineHeightChange}
               value={typeScaleItem.adjustedLineHeight}
               suffix="a:2" />
-
-            <VInputField
-              isVisible={this.props.snapToggle}
-              type="number"
-              onChange={handleAdjustedLineHeightChange}
-              value={typeScaleItem.adjustedLineHeight}
-              suffix="a:3" />
           </div>
         </td>
       </tr>

@@ -35,8 +35,8 @@
   box-sizing: border-box;
   -moz-appearance: textfield;
 }
-.VInputField input::-webkit-outer-spin-button,
-.VInputField input::-webkit-inner-spin-button {
+.VInputField input:not(:focus)::-webkit-outer-spin-button,
+.VInputField input:not(:focus)::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
 }
@@ -59,4 +59,7 @@
   color: var(--base-low);
   cursor: text;
   user-select: none;
+}
+.VInputField:focus-within .suffix {
+  display: none;
 }

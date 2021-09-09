@@ -25,7 +25,7 @@ class App extends React.Component {
         {id: 3, size: 18, title: "Subtitle"},
         {id: 4, size: 20, title: "Title"}
       ]
-    }
+    };
 
     this.handleBaseFontChange = this.handleBaseFontChange.bind(this);
     this.handleSnapToggleChange = this.handleSnapToggleChange.bind(this);
@@ -38,10 +38,13 @@ class App extends React.Component {
     this.computeLineHeights = this.computeLineHeights.bind(this);
   }
 
+  //#region [ React life cycle ]
   componentDidMount() {
     this.computeLineHeights();
   }
+  //#endregion
 
+  //#region [ handlers ]
   handleBaseFontChange(e) {
     this.setState({
       baseFont: e.target.value
@@ -114,20 +117,23 @@ class App extends React.Component {
 
     this.setState(state => {
       const typeScale = state.typeScale.map((item, i) => {
-        if (id === i) {
-          item[key] = value;
-          if (key === 'size') {
-            const computedLineHeight = item['size'] * defaultLineHeight
-            item['computedLineHeight'] = computedLineHeight;
-            item['adjustedLineHeight'] = this.roundToGrid(computedLineHeight);
-          }
+        if (id !== item.id) return item;
+
+        item[key] = value;
+        if (key === 'size') {
+          const computedLineHeight = this.computeDefaultLineHeight(item.size, defaultLineHeight);
+          item.computedLineHeight = computedLineHeight;
+          item.adjustedLineHeight = this.roundToGrid(computedLineHeight);
         }
+          
         return item;
       });
       return { typeScale: typeScale };
     });
   }
+  //#endregion
 
+  //#region [ helper methods ]
   roundToGrid(number, newGridSize) {
     const gridSize = newGridSize ?? this.state.gridSize;
     return Math.round(number / gridSize) * gridSize;
@@ -137,27 +143,27 @@ class App extends React.Component {
     return fontSize * lineHeight;
   }
 
-  computeLineHeights(newLineHeight, newGridSize) {
-    const defaultLineHeight = newLineHeight ?? this.state.defaultLineHeight;
-    const gridSize = newGridSize ?? this.state.gridSize;
-    
+  computeLineHeights(newLineHeight, newGridSize, isSnapActive) {
+    const defaultLineHeight = newLineHeight;
+    const gridSize = newGridSize;
+
     this.setState(state => {
       const typeScale = state.typeScale.map((item) => {
-        const computedLineHeight = this.computeDefaultLineHeight(item['size'], defaultLineHeight);
-        item['computedLineHeight'] = computedLineHeight;
-        item['adjustedLineHeight'] = this.roundToGrid(computedLineHeight, gridSize);
+        const computedLineHeight = this.computeDefaultLineHeight(item.size, defaultLineHeight);
+        item.computedLineHeight = computedLineHeight;
+        item.adjustedLineHeight = this.roundToGrid(computedLineHeight, gridSize);
         return item;
       });
       return { typeScale: typeScale };
     });
   }
+  //#endregion
 
   render() {
 
     return (
       <div className="App">
         <section className="App-panel">
-
           <h2>Typographic structure</h2>
 
           <div className="VRow">
@@ -206,6 +212,7 @@ class App extends React.Component {
 
           <datalist id="fontFamilySuggestions">
             <option value="-apple-system,BlinkMacSystemFont,Segoe UI Variable Text,Segoe UI,Meiryo,system-ui,ui-sans-serif,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji" />
+            <option value="Selawik" />
             <option value="sans-serif" />
           </datalist>
 
@@ -220,6 +227,7 @@ class App extends React.Component {
             gridSize={this.state.gridSize} />
 
         </section>
+        
         <section className="App-output">
           <SampleGrid
             gridSize={this.state.gridSize}

@@ -13,16 +13,15 @@ class TypeScaleEditor extends React.Component {
 
   }
 
-  handleInputChange(e, id, name, value) {
+  handleInputChange(id, name, value) {
     this.props.onChange(id, name, value);
   }
 
-  adjustLineHeight(e, id, operation) {
-    const step = this.props.gridSize;
+  adjustLineHeight(id, operation) {
+    const step = this.props.gridSize * ((operation === 'add') ? 1 : -1);
     const currentValue = this.props.typeScale[id].adjustedLineHeight;
-    const newValue = (operation === 'add') ? currentValue + step : currentValue - step;
 
-    this.props.onChange(id, 'adjustedLineHeight', newValue);
+    this.props.onChange(id, 'adjustedLineHeight', currentValue + step);
   }
 
   render() {
@@ -41,8 +40,8 @@ class TypeScaleEditor extends React.Component {
           <VInputField
             key={typeScaleItem.id + '_size'}
             name={'typeScale[' + typeScaleItem.id + '][size]'}
-            onChange={e => {
-              this.handleInputChange(e, typeScaleItem.id, 'size', e.target.value);
+            onChange={(e) => {
+              this.handleInputChange(typeScaleItem.id, 'size', e.target.value);
             }}
             value={typeScaleItem.size}
             suffix="px" />
@@ -53,8 +52,8 @@ class TypeScaleEditor extends React.Component {
             name={'typeScale[' + typeScaleItem.id + '][title]'}
             type="text"
             value={typeScaleItem.title}
-            onChange={e => {
-              this.handleInputChange(e, typeScaleItem.id, 'title', e.target.value);
+            onChange={(e) => {
+              this.handleInputChange(typeScaleItem.id, 'title', e.target.value);
             }} />
         </td>
         <td>
@@ -65,8 +64,8 @@ class TypeScaleEditor extends React.Component {
               type="number"
               disabled
               isVisible={!this.props.snapToggle}
-              onChange={e => {
-                this.handleInputChange(e, typeScaleItem.id, 'computedLineHeight', e.target.value);
+              onChange={(e) => {
+                this.handleInputChange(typeScaleItem.id, 'computedLineHeight', e.target.value);
               }}
               value={typeScaleItem.computedLineHeight}
               suffix="px" />
@@ -76,22 +75,22 @@ class TypeScaleEditor extends React.Component {
               name={'typeScale[' + typeScaleItem.id + '][adjustedLineHeight]'}
               type="number"
               step={step}
-              onChange={e => {
-                this.handleInputChange(e, typeScaleItem.id, 'adjustedLineHeight', e.target.value);
+              onChange={(e) => {
+                this.handleInputChange(typeScaleItem.id, 'adjustedLineHeight', e.target.value);
               }}
               value={typeScaleItem.adjustedLineHeight}
               suffix="px" />
             
             <button
               className="tempBtn"
-              onClick={e => {
-                this.adjustLineHeight(e, typeScaleItem.id, 'add');
+              onClick={() => {
+                this.adjustLineHeight(typeScaleItem.id, 'add');
               }}>+</button>
             
             <button
               className="tempBtn"
-              onClick={e => {
-                this.adjustLineHeight(e, typeScaleItem.id, 'substract');
+              onClick={() => {
+                this.adjustLineHeight(typeScaleItem.id, 'substract');
               }}>&minus;</button>
           </div>
         </td>

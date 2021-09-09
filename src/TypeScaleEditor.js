@@ -8,13 +8,18 @@ class TypeScaleEditor extends React.Component {
 
   constructor(props) {
     super(props);
-    this.handleInputChange = this.handleInputChange.bind(this);
-    this.adjustLineHeight = this.adjustLineHeight.bind(this);
 
+    this.bindHandlersToContext();
   }
 
+  bindHandlersToContext() {
+    this.handleInputChange = this.handleInputChange.bind(this);
+    this.adjustLineHeight = this.adjustLineHeight.bind(this);
+  }
+
+
   handleInputChange(id, name, value) {
-    this.props.onChange(id, name, value);
+    this.props.onChange(id, name, +value);
   }
 
   adjustLineHeight(id, operation) {
@@ -26,9 +31,11 @@ class TypeScaleEditor extends React.Component {
 
   render() {
     const typeScale = this.props.typeScale;
-    const listItems = typeScale.map((typeScaleItem) => {
 
+    const listItems = typeScale.map((typeScaleItem) => {
       let step = this.props.gridSize;
+
+      console.log('render', typeScaleItem.id, typeScaleItem.adjustedLineHeight);
 
       if (!this.props.snapToggle) {
         step = 1;
@@ -64,9 +71,6 @@ class TypeScaleEditor extends React.Component {
               type="number"
               disabled
               isVisible={!this.props.snapToggle}
-              onChange={(e) => {
-                this.handleInputChange(typeScaleItem.id, 'computedLineHeight', e.target.value);
-              }}
               value={typeScaleItem.computedLineHeight}
               suffix="px" />
 
@@ -104,7 +108,7 @@ class TypeScaleEditor extends React.Component {
           <tr>
             <th>Size:</th>
             <th>Title:</th>
-            <th>Adjusted line height:</th>
+            <th>Line height:</th>
           </tr>
         </thead>
         <tbody>

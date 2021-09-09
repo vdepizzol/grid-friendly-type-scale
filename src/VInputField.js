@@ -36,7 +36,7 @@ class VInputField extends React.Component {
           step={this.props.step}
           id={this.props.id}
           disabled={this.props.disabled}
-          defaultValue={this.props.value}
+          value={this.props.value}
           onChange={this.handleChange}
           placeholder={this.props.placeholder}
           list={this.props.list}

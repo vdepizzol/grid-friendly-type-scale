@@ -27,82 +27,76 @@ class App extends React.Component {
       ]
     };
 
+    this.bindHandlersToContext();
+
+    //this.computeDefaultLineHeight = this.computeDefaultLineHeight.bind(this);
+    //this.setLineHeights = this.setLineHeights.bind(this);
+
+    this.setLineHeights(this.state.typeScale, this.state);
+  }
+
+  bindHandlersToContext() {
     this.handleBaseFontChange = this.handleBaseFontChange.bind(this);
     this.handleSnapToggleChange = this.handleSnapToggleChange.bind(this);
     this.handleGridSizeChange = this.handleGridSizeChange.bind(this);
     this.handleDefaultLineHeightChange = this.handleDefaultLineHeightChange.bind(this);
     this.handleFontFamilyChange = this.handleFontFamilyChange.bind(this);
-
     this.handleTypeScaleEditorChange = this.handleTypeScaleEditorChange.bind(this);
-    this.computeDefaultLineHeight = this.computeDefaultLineHeight.bind(this);
-    this.computeLineHeights = this.computeLineHeights.bind(this);
   }
-
-  //#region [ React life cycle ]
-  componentDidMount() {
-    this.computeLineHeights();
-  }
-  //#endregion
 
   //#region [ handlers ]
   handleBaseFontChange(e) {
     this.setState({
-      baseFont: e.target.value
+      baseFont: e.target.value.trim() || 0
     });
   }
 
   handleSnapToggleChange(e) {
-    const snap = !this.state.snapToggle;
+    let isSnapActive =  e.target.checked;
+
+    let typeScale = this.state.typeScale.concat();
+    this.setLineHeights(typeScale, {
+      defaultLineHeight: this.state.defaultLineHeight, 
+      gridSize: this.state.gridSize, 
+      snapToggle: isSnapActive
+    });
 
     this.setState({
-      snapToggle: snap
+      snapToggle: isSnapActive,
+      typeScale: typeScale,
     });
-    
-    if (snap === true) {
-      console.log('snapped');
-      this.computeLineHeights();
-
-      // Reset computedLineHeight
-      /*
-      this.setState(state => {
-        const typeScale = state.typeScale.map((item) => {
-          console.log('@', item['size'], this.props.defaultLineHeight);
-          item['computedLineHeight'] = this.computeDefaultLineHeight(item['size'], this.state.defaultLineHeight);
-          return item;
-        });
-        return { typeScale: typeScale };
-      });
-      */
-    } else {
-      console.log('not snapped');
-      //this.computeLineHeights(null, 1);
-
-      // Reset adjustedLineHeight to be equal to computedLineHeight
-      this.setState(state => {
-        const typeScale = state.typeScale.map((item) => {
-          item['adjustedLineHeight'] = item['computedLineHeight'];
-          return item;
-        });
-        return { typeScale: typeScale };
-      });
-    }
   }
 
   handleGridSizeChange(e) {
-    console.log('grid size changed');
     const value = e.target.value;
-    this.setState({
-      gridSize: value
+
+    let typeScale = this.state.typeScale.concat();
+    this.setLineHeights(typeScale, {
+      defaultLineHeight: this.state.defaultLineHeight, 
+      gridSize: value, 
+      snapToggle: this.state.snapToggle
     });
-    this.computeLineHeights(null, value);
+
+    this.setState({
+      gridSize: value,
+      typeScale: typeScale,
+    });
   }
 
   handleDefaultLineHeightChange(e) {
     const value = e.target.value;
-    this.setState({
-      defaultLineHeight: value
+
+    let typeScale = this.state.typeScale.concat();
+    this.setLineHeights(typeScale, {
+      defaultLineHeight: value, 
+      gridSize: this.state.gridSize, 
+      snapToggle: this.state.snapToggle
     });
-    this.computeLineHeights(value);
+
+    this.setState({
+      defaultLineHeight: value,
+      typeScale: typeScale,
+    });
   }
 
   handleFontFamilyChange(e) {
@@ -113,29 +107,25 @@ class App extends React.Component {
   }
 
   handleTypeScaleEditorChange(id, key, value) {
-    const defaultLineHeight = this.state.defaultLineHeight;
+    let typeScales = this.state.typeScale.concat();
 
-    this.setState(state => {
-      const typeScale = state.typeScale.map((item, i) => {
-        if (id !== item.id) return item;
+    let typeScale = typeScales.find(item => item.id === id);
+    typeScale[key] = value;
 
-        item[key] = value;
-        if (key === 'size') {
-          const computedLineHeight = this.computeDefaultLineHeight(item.size, defaultLineHeight);
-          item.computedLineHeight = computedLineHeight;
-          item.adjustedLineHeight = this.roundToGrid(computedLineHeight);
-        }
-          
-        return item;
+    if (key === 'size') {
+      this.setLineHeights(typeScales, {
+        defaultLineHeight: this.state.defaultLineHeight, 
+        gridSize: this.state.gridSize, 
+        snapToggle: this.state.snapToggle
       });
-      return { typeScale: typeScale };
-    });
+    }
+
+    this.setState({typeScale: typeScales});   
   }
   //#endregion
 
   //#region [ helper methods ]
-  roundToGrid(number, newGridSize) {
-    const gridSize = newGridSize ?? this.state.gridSize;
+  roundToGrid(number, gridSize) {
     return Math.round(number / gridSize) * gridSize;
   }
 
@@ -143,18 +133,17 @@ class App extends React.Component {
     return fontSize * lineHeight;
   }
 
-  computeLineHeights(newLineHeight, newGridSize, isSnapActive) {
-    const defaultLineHeight = newLineHeight;
-    const gridSize = newGridSize;
+  //typescales, scale properties {newLineHeight, newGridSize, isSnapActive}
+  setLineHeights(typeScales, scaleProps) {
+    const {defaultLineHeight, gridSize, snapToggle: isSnapActive} = scaleProps;
+    
+    typeScales.forEach(item => {
+      const computedLineHeight = this.computeDefaultLineHeight(item.size, defaultLineHeight);
+      item.computedLineHeight = computedLineHeight;
 
-    this.setState(state => {
-      const typeScale = state.typeScale.map((item) => {
-        const computedLineHeight = this.computeDefaultLineHeight(item.size, defaultLineHeight);
-        item.computedLineHeight = computedLineHeight;
-        item.adjustedLineHeight = this.roundToGrid(computedLineHeight, gridSize);
-        return item;
-      });
-      return { typeScale: typeScale };
+      item.adjustedLineHeight = (isSnapActive)
+        ? this.roundToGrid(computedLineHeight, gridSize)
+        : item.computedLineHeight;
     });
   }
   //#endregion

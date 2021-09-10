@@ -29,12 +29,13 @@ class SampleGrid extends React.Component {
       padding: (gridSize * 4) + 'px'
     };
 
-    const lipsum = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras mattis, erat in convallis sollicitudin, tellus felis euismod urna, in vestibulum lacus nulla consequat mi. In ut viverra dolor, eu varius nisi. Morbi fermentum iaculis sagittis. Sed ut mi neque. Phasellus ornare arcu faucibus tincidunt lacinia. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Vestibulum molestie vestibulum elit, in porta ex mattis vel.';
+    const lipsum = 'While it’s true that the Dutch and Flemish are avid linguists, a little effort on your part to speak the local language will be warmly received as a sign of good-will. And remember that a country’s language is also a key to its culture.';
 
     const listItems = this.props.typeScale.map((typeScaleItem) => {
       // FIXME
       const style = {
         fontSize: typeScaleItem.size + 'px',
+        maxWidth: '64ch',
         fontFamily: fontFamily,
         lineHeight: typeScaleItem.adjustedLineHeight + 'px',
         backgroundColor: (this.state.showGrid) ? 'rgba(255, 0, 0, 0.1)' : 'transparent',

@@ -19,8 +19,8 @@ class App extends React.Component {
       defaultLineHeight: 1.5,
       fontFamily: "sans-serif",
       typeScale: [
-        {id: 0, size: 12, title: "Caption", computedLineHeight: null, adjustedLineHeight: null},
-        {id: 1, size: 14, title: "Body 1", computedLineHeight: null, adjustedLineHeight: null},
+        {id: 0, size: 12, title: "Caption"},
+        {id: 1, size: 14, title: "Body 1"},
         {id: 2, size: 16, title: "Body 2"},
         {id: 3, size: 18, title: "Subtitle"},
         {id: 4, size: 20, title: "Title"}
@@ -153,7 +153,8 @@ class App extends React.Component {
     return (
       <div className="App">
         <section className="App-panel">
-          <h2>Typographic structure</h2>
+          <h2>Grid-friendly relative line heights for the web</h2>
+          <p>Test and validate your type scale while thinking in CSS pixels (like modern design tools do), snap line heights to a grid (for scalability when working with components), and generate a relative output using <code>rem</code> for font sizes and unitless line heights. <a href="#">Learn more</a>.</p>
 
           <div className="VRow">
             <VLabel id="base-font" title="Base size">
@@ -171,7 +172,7 @@ class App extends React.Component {
               checked={this.state.snapToggle}>
               <VInputField
                 id="base-grid"
-                disabled={!this.state.snapToggle}
+                isDisabled={!this.state.snapToggle}
                 onChange={this.handleGridSizeChange}
                 value={this.state.gridSize}
                 suffix="px" />

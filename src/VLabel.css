@@ -16,3 +16,20 @@
   max-width: none;
   box-sizing: border-box;
 }
+.VLabel input[type="checkbox"] {
+  accent-color: var(--accent);
+  margin: 0 var(--scale-4) 0 0;
+  position: relative;
+  width: var(--scale-12);
+  height: var(--scale-12);
+  vertical-align: baseline;
+}
+.VLabel input[type="checkbox"]:after {
+  content: "";
+  position: absolute;
+  background: transparent;
+  width: var(--scale-24);
+  height: var(--scale-24);
+  margin-left: calc((var(--scale-24) - var(--scale-12)) / -2);
+  margin-top: calc((var(--scale-24) - var(--scale-12)) / -2);
+}

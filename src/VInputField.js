@@ -21,7 +21,7 @@ class VInputField extends React.Component {
   }
 
   render() {
-    let className = (this.props.disabled) ? 'disabled' : '';
+    let className = (this.props.isDisabled) ? 'disabled' : '';
     className += (this.props.isVisible) ? ' hidden' : '';
     className += (this.props.className) ? (' ' + this.props.className) : '';
 
@@ -35,7 +35,7 @@ class VInputField extends React.Component {
           type={this.props.type ?? 'number'}
           step={this.props.step}
           id={this.props.id}
-          disabled={this.props.disabled}
+          isDisabled={this.props.isDisabled}
           value={this.props.value}
           onChange={this.handleChange}
           placeholder={this.props.placeholder}

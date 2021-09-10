@@ -1,4 +1,9 @@
 .TypeScaleEditor {
+  border: 0;
+  padding: 0;
+  border-spacing: 0;
+  border-collapse: collapse;
+  border-radius: 10px;
 }
 
 .TypeScaleEditor thead, .TypeScaleEditor th {
@@ -7,5 +12,21 @@
 }
 
 .TypeScaleEditor td {
-  padding: 0 8px 4px 0;
+  padding: 0;
+  border: 1px solid #ccc;
+}
+
+.TypeScaleEditor td .VInputField {
+  width: 100%;
+  border-radius: 0;
+  border: none;
+}
+.TypeScaleEditor tr:focus-within {
+  background: #ccc;
+  border-radius: 3px;
+}
+.TypeScaleEditor td .VInputField:focus-within {
+  box-shadow: 0 0 0 1px var(--ui-obj-focus);
+  position: relative;
+  z-index: 10;
 }

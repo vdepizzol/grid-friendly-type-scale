@@ -6,21 +6,21 @@
 }
 
 .App section {
-  background: var(--chrome-medium);
-  padding: var(--scale-16);
+  background: var(--ui-chrome-medium);
+  padding: var(--scale-24);
   min-height: 100vh;
   box-sizing: border-box;
 }
 
 .App .App-output {
   padding: 0;
-  background: var(--chrome-low);
+  background: var(--ui-chrome-low);
 }
 .App .App-output .sample-grid {
   overflow: auto;
 }
 .App .App-output .sample-grid.show-grid {
-  background-image: linear-gradient(to bottom, #ccc 1px, transparent 1px);
+  background-image: linear-gradient(to bottom, rgba(255, 0, 0, 0.06) 1px, transparent 1px);
 }
 
 

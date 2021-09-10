@@ -1,40 +1,53 @@
 .VInputField {
-  --VInputField-border-width: 2px;
+  --VInputField-border-width: 1px;
 
-  max-width: 8ch;
+  box-sizing: border-box;
+  /*max-width: 8ch;*/
   position: relative;
-  font-size: 14px;
-  border: var(--VInputField-border-width) solid var(--ui-border);
-  border-radius: 6px;
-  background: var(--ui-high);
+  font-size: inherit;
+  line-height: var(--ui-line-height);
+  border: var(--ui-border-width-thin) solid var(--ui-obj-border);
+  border-radius: 4px;
+  background: var(--ui-obj-high);
   display: grid;
   grid-auto-flow: column;
-  gap: 4px;
+  gap: var(--scale-4);
+  padding: calc(var(--scale-4) - var(--ui-border-width-thin));
   cursor: text;
 }
 .VInputField.hidden {
   opacity: 0.25;
 }
 .VInputField.disabled {
-  background: var(--ui-low);
+  background: var(--ui-obj-low);
 }
 .VInputField.fullWidth {
   width: 100%;
   max-width: none;
 }
 
+/* Focus */
+
 .VInputField:focus-within {
-  border-color: var(--ui-focus);
+  border-color: var(--ui-obj-focus);
+}
+.VInputField input:focus {
+  outline: none;
 }
 
 .VInputField input {
   border: none;
   background: transparent;
   font: inherit;
+  line-height: inherit;
   width: 100%;
   box-sizing: border-box;
   -moz-appearance: textfield;
+  padding: 0;
 }
+
+/* OS elements */
+
 .VInputField input:not(:focus)::-webkit-outer-spin-button,
 .VInputField input:not(:focus)::-webkit-inner-spin-button {
     -webkit-appearance: none;
@@ -44,19 +57,15 @@
   display: none !important;
 }
 
-.VInputField input:focus {
-  outline: none;
-}
 .VInputField input:invalid {
-  color: var(--base-invalid);
+  color: var(--ui-text-invalid);
 }
-
 
 
 
 .VInputField .suffix {
   padding-right: 4px;
-  color: var(--base-low);
+  color: var(--ui-text-low);
   cursor: text;
   user-select: none;
 }

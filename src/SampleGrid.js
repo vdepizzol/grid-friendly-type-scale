@@ -38,6 +38,7 @@ class SampleGrid extends React.Component {
         maxWidth: '64ch',
         fontFamily: fontFamily,
         lineHeight: typeScaleItem.adjustedLineHeight + 'px',
+        fontWeight: typeScaleItem.weight,
         backgroundColor: (this.state.showGrid) ? 'rgba(255, 0, 0, 0.1)' : 'transparent',
         marginBottom: (this.state.showGrid) ? 'calc(' + (this.props.gridSize * 2) + 'px - 1px)' : (this.props.gridSize * 2),
 

@@ -33,14 +33,18 @@ class VInputField extends React.Component {
         <input
           name={this.props.name}
           type={this.props.type ?? 'number'}
-          step={this.props.step}
           id={this.props.id}
           isDisabled={this.props.isDisabled}
           value={this.props.value}
           onChange={this.handleChange}
           placeholder={this.props.placeholder}
           list={this.props.list}
-          ref={this.inputField} />
+          ref={this.inputField}
+
+          step={this.props.step}
+          min={this.props.min}
+          max={this.props.max}
+          />
 
         {this.props.suffix &&
           <span className="suffix">{this.props.suffix}</span>

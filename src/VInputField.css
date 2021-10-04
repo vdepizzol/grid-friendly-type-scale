@@ -30,6 +30,7 @@
 
 .VInputField:focus-within {
   border-color: var(--ui-obj-focus);
+  box-shadow: 0 0 0 3px rgba(0, 0, 255, 0.2);
 }
 .VInputField input:focus {
   outline: none;

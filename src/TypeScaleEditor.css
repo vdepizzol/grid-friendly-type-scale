@@ -8,7 +8,8 @@
 
 .TypeScaleEditor thead, .TypeScaleEditor th {
   text-align: left;
-  font-weight: normal;
+  font-weight: 600;
+  font-size: 12px;
 }
 
 .TypeScaleEditor td {
@@ -27,6 +28,8 @@
 }
 .TypeScaleEditor td .VInputField:focus-within {
   box-shadow: 0 0 0 1px var(--ui-obj-focus);
+  box-shadow: 0 0 0 1px var(--ui-obj-focus), 0 0 0 4px rgba(0, 0, 255, 0.2);
+  border-radius: 2px;
   position: relative;
   z-index: 10;
 }

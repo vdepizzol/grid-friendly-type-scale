@@ -4,6 +4,7 @@ import Welcome from './Welcome';
 import VInputField from './VInputField';
 import VLabel from './VLabel';
 import SampleGrid from './SampleGrid';
+import CSSOutput from './CSSOutput';
 import TypeScaleEditor from './TypeScaleEditor';
 import './App.css';
 
@@ -19,11 +20,11 @@ class App extends React.Component {
       defaultLineHeight: 1.5,
       fontFamily: "sans-serif",
       typeScale: [
-        {id: 0, size: 12, title: "Caption"},
-        {id: 1, size: 14, title: "Body 1"},
-        {id: 2, size: 16, title: "Body 2"},
-        {id: 3, size: 18, title: "Subtitle"},
-        {id: 4, size: 20, title: "Title"}
+        {id: 0, size: 12, title: "Caption", weight: 400},
+        {id: 1, size: 14, title: "Body 1", weight: 400},
+        {id: 2, size: 16, title: "Body 2", weight: 400},
+        {id: 3, size: 18, title: "Subtitle", weight: 600},
+        {id: 4, size: 20, title: "Title", weight: 600}
       ]
     };
 
@@ -151,9 +152,9 @@ class App extends React.Component {
   render() {
 
     return (
-      <div className="App">
-        <section className="App-panel">
-          <h2>Grid-friendly relative line heights for the web</h2>
+      <div className="app">
+        <section className="app-panel">
+          <h1>Grid-friendly relative line heights for the web</h1>
           <p>Test and validate your type scale while thinking in CSS pixels (like modern design tools do), snap line heights to a grid (for scalability when working with components), and generate a relative output using <code>rem</code> for font sizes and unitless line heights. <a href="#">Learn more</a>.</p>
 
           <div className="VRow">
@@ -218,15 +219,24 @@ class App extends React.Component {
 
         </section>
         
-        <section className="App-output">
+        <section className="app-output">
           <SampleGrid
             gridSize={this.state.gridSize}
             typeScale={this.state.typeScale}
             fontFamily={this.state.fontFamily} />
         </section>
 
+        <section className="app-code">
+          <CSSOutput
+            typeScale={this.state.typeScale}
+            baseFont={this.state.baseFont}
+            />
+        </section>
+
         <section className="App-about">
+          { /*
           <Welcome name="V" />
+          */ }
         </section>
       </div>
     );

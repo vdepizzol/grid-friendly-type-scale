@@ -1,9 +1,9 @@
 import React from 'react';
 import VInputField from './VInputField';
 import VLabel from './VLabel';
-import './EditToolbar.css';
+import './EditorToolbar.css';
 
-class EditToolbar extends React.Component {
+class EditorToolbar extends React.Component {
 
   constructor(props) {
     super(props);
@@ -41,8 +41,8 @@ class EditToolbar extends React.Component {
 
   render() {
       return (
-        <div id="edit-toolbar">
-          <div class="edit-toolbar-base">
+        <div className="editor-toolbar">
+          <div className="editor-toolbar-base">
             <VLabel id="base-font" title="Base size">
               <VInputField
                   id="base-font"
@@ -72,9 +72,7 @@ class EditToolbar extends React.Component {
                   onChange={this.handleDefaultLineHeightChange}
                   value={this.props.config.defaultLineHeight} />
             </VLabel>
-          </div>
 
-          <div class="edit-toolbar-output">
             <VLabel
               id="font-family"
               title="Font family">
@@ -92,8 +90,21 @@ class EditToolbar extends React.Component {
               <option value="sans-serif" />
             </datalist>
           </div>
+
+          <div className="editor-toolbar-output">
+          <VLabel
+              id="variable-prefix"
+              title="Variable prefix">
+              <VInputField
+                  type="text"
+                  id="variable-prefix"
+                  /*onChange={this.handleFontFamilyChange}*/
+                  value="text" />
+            </VLabel>
+
+          </div>
         </div>
       );
   }
 }
-export default EditToolbar;
+export default EditorToolbar;

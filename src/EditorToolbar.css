@@ -1,19 +1,21 @@
-#edit-toolbar {
+.editor-toolbar {
   background: var(--ui-obj-medium);
   display: grid;
   grid-auto-flow: column;
-  padding: var(--scale-16);
   border-radius: var(--ui-border-radius-large);
-  gap: var(--scale-16);
-  grid-template-columns: 1fr 400px;
+  gap: var(--scale-24);
+  grid-template-columns: 2fr 1fr;
 }
 
-.edit-toolbar-base {
+.editor-toolbar-base {
   display: flex;
   flex-flow: row;
   gap: var(--scale-16);
+  padding: var(--scale-16);
 }
 
-.edit-toolbar-output {
+.editor-toolbar-output {
   background: transparent;
+  padding: var(--scale-16);
+  padding-left: 0;
 }

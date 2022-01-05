@@ -1,22 +1,17 @@
 .app {
-  /*display: grid;
-  grid-template-columns: 400px 1fr 400px;
-  grid-auto-flow: column;
-  gap: var(--scale-16);*/
   max-width: 1080px;
-  margin: var(--scale-16) auto;
+  margin: var(--scale-24) auto;
 }
 
-.app section {
-  background: var(--ui-chrome-medium);
-  padding: var(--scale-24);
-  box-sizing: border-box;
+.app-header, .app-toolbar {
+  margin-bottom: var(--scale-24);
 }
 
-.app .app-panel h1 {
-  margin: 0;
+.app-main {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: var(--scale-24);
 }
-
 .app .app-output {
   padding: 0;
   background: var(--ui-chrome-low);
@@ -30,15 +25,8 @@
 
 /* app-code */
 
-.app .app-code {
-  background: #ccc;
+.app .app-output {
   font-family: monospace;
   white-space: pre;
-}
-
-
-.VRow {
-  display: inline-grid;
-  grid-auto-flow: column;
-  gap: 12px;
+  color: #FF6B3E;
 }

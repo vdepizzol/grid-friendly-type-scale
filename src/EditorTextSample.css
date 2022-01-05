@@ -1,0 +1,17 @@
+.editor-text-sample {
+  padding-left: 0;
+  padding-right: var(--scale-16);
+}
+
+.editor-ruler {
+  position: relative;
+  padding-left: var(--scale-16);
+  padding-bottom: 1px;
+  background-size: 8px var(--sample-ruler-large), 4px var(--sample-ruler-small);
+  background-image: linear-gradient(to bottom, var(--ui-obj-accent) 1px, transparent 1px), linear-gradient(to bottom, var(--ui-obj-border) 1px, transparent 1px);
+  background-repeat: repeat-y, repeat-y;
+  font-size: var(--sample-font-size);
+  line-height: var(--sample-line-height);
+  font-weight: var(--sample-font-weight);
+  max-width: 65ch;
+}

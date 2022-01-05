@@ -1,9 +1,8 @@
 //import logo from './logo.svg';
 import React from 'react';
 import Header from './Header';
-import EditToolbar from './EditToolbar';
-import VInputField from './VInputField';
-import VLabel from './VLabel';
+import EditorToolbar from './EditorToolbar';
+import EditorTextSample from './EditorTextSample';
 import SampleGrid from './SampleGrid';
 import CSSOutput from './CSSOutput';
 import TypeScaleEditor from './TypeScaleEditor';
@@ -37,7 +36,7 @@ class App extends React.Component {
     //this.computeDefaultLineHeight = this.computeDefaultLineHeight.bind(this);
     //this.setLineHeights = this.setLineHeights.bind(this);
 
-    this.setLineHeights(this.state.typeScale, this.state);
+    this.setLineHeights(this.state.typeScale, this.state.config);
   }
 
   bindHandlersToContext() {
@@ -166,51 +165,47 @@ class App extends React.Component {
 
     return (
       <div className="app">
-        
-        <Header />
 
-        <EditToolbar
-          config={this.state.config}
-          onBaseFontChange={this.handleBaseFontChange}
-          onSnapToggleChange={this.handleSnapToggleChange}
-          onGridSizeChange={this.handleGridSizeChange}
-          onDefaultLineHeightChange={this.handleDefaultLineHeightChange}
-          onFontFamilyChange={this.handleFontFamilyChange}
-        />
+        <div className="app-header">
+          <Header />
+          { /* Tabs */ }
+        </div>
 
-        <section className="app-panel">
+        <div className="app-toolbar">
+          <EditorToolbar
+            config={this.state.config}
+            onBaseFontChange={this.handleBaseFontChange}
+            onSnapToggleChange={this.handleSnapToggleChange}
+            onGridSizeChange={this.handleGridSizeChange}
+            onDefaultLineHeightChange={this.handleDefaultLineHeightChange}
+            onFontFamilyChange={this.handleFontFamilyChange}
+          />
+        </div>
 
-          <h2 style={{
-            marginTop: 16
-          }}>Type scale</h2>
+        <div class="app-main">
+          <div className="app-edit-panel">
+            <TypeScaleEditor
+              config={this.state.config}
+              typeScale={this.state.typeScale}
+              onChange={this.handleTypeScaleEditorChange}
+              snapToggle={this.state.config.snapToggle}
+              gridSize={this.state.config.gridSize} />
 
-          <TypeScaleEditor
-            typeScale={this.state.typeScale}
-            onChange={this.handleTypeScaleEditorChange}
-            snapToggle={this.state.config.snapToggle}
-            gridSize={this.state.config.gridSize} />
+            {/*
+            <SampleGrid
+              gridSize={this.state.config.gridSize}
+              typeScale={this.state.typeScale}
+              fontFamily={this.state.config.fontFamily} />
+            */}
+          </div>
 
-        </section>
-        
-        <section className="app-output">
-          <SampleGrid
-            gridSize={this.state.config.gridSize}
-            typeScale={this.state.typeScale}
-            fontFamily={this.state.config.fontFamily} />
-        </section>
-
-        <section className="app-code">
-          <CSSOutput
-            typeScale={this.state.typeScale}
-            baseFont={this.state.config.baseFont}
-            />
-        </section>
-
-        <section className="App-about">
-          { /*
-          <Welcome name="V" />
-          */ }
-        </section>
+          <div className="app-output">
+            <CSSOutput
+              typeScale={this.state.typeScale}
+              baseFont={this.state.config.baseFont}
+              />
+          </div>
+        </div>
       </div>
     );
   }

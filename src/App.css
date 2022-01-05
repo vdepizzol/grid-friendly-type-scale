@@ -1,14 +1,15 @@
 .app {
-  display: grid;
+  /*display: grid;
   grid-template-columns: 400px 1fr 400px;
   grid-auto-flow: column;
-  gap: var(--scale-16);
+  gap: var(--scale-16);*/
+  max-width: 1080px;
+  margin: var(--scale-16) auto;
 }
 
 .app section {
   background: var(--ui-chrome-medium);
   padding: var(--scale-24);
-  min-height: 100vh;
   box-sizing: border-box;
 }
 

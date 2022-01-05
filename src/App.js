@@ -1,6 +1,7 @@
 //import logo from './logo.svg';
 import React from 'react';
-import Welcome from './Welcome';
+import Header from './Header';
+import EditToolbar from './EditToolbar';
 import VInputField from './VInputField';
 import VLabel from './VLabel';
 import SampleGrid from './SampleGrid';
@@ -14,18 +15,21 @@ class App extends React.Component {
     super(props);
 
     this.state = {
-      baseFont: 16,
-      snapToggle: true,
-      gridSize: 4,
-      defaultLineHeight: 1.5,
-      fontFamily: "sans-serif",
+      config: {
+        baseFont: 16,
+        snapToggle: true,
+        gridSize: 4,
+        defaultLineHeight: 1.5,
+        fontFamily: "sans-serif",
+        variablePrefix: "text",
+      },
       typeScale: [
         {id: 0, size: 12, title: "Caption", weight: 400},
         {id: 1, size: 14, title: "Body 1", weight: 400},
         {id: 2, size: 16, title: "Body 2", weight: 400},
         {id: 3, size: 18, title: "Subtitle", weight: 600},
-        {id: 4, size: 20, title: "Title", weight: 600}
-      ]
+        {id: 4, size: 20, title: "Title", weight: 600},
+      ],
     };
 
     this.bindHandlersToContext();
@@ -46,64 +50,73 @@ class App extends React.Component {
   }
 
   //#region [ handlers ]
-  handleBaseFontChange(e) {
+  handleBaseFontChange(value) {
     this.setState({
-      baseFont: e.target.value.trim() || 0
+      config: {
+        ...this.state.config,
+        baseFont: value.trim() || 0
+      }
     });
   }
 
-  handleSnapToggleChange(e) {
-    let isSnapActive =  e.target.checked;
-
+  handleSnapToggleChange(isSnapActive) {
     let typeScale = this.state.typeScale.concat();
+
     this.setLineHeights(typeScale, {
-      defaultLineHeight: this.state.defaultLineHeight, 
-      gridSize: this.state.gridSize, 
+      defaultLineHeight: this.state.config.defaultLineHeight, 
+      gridSize: this.state.config.gridSize, 
       snapToggle: isSnapActive
     });
 
     this.setState({
-      snapToggle: isSnapActive,
-      typeScale: typeScale,
+      config: {
+        ...this.state.config,
+        snapToggle: isSnapActive,
+        typeScale: typeScale,
+      }
     });
   }
 
-  handleGridSizeChange(e) {
-    const value = e.target.value;
-
+  handleGridSizeChange(value) {
     let typeScale = this.state.typeScale.concat();
     this.setLineHeights(typeScale, {
-      defaultLineHeight: this.state.defaultLineHeight, 
+      defaultLineHeight: this.state.config.defaultLineHeight, 
       gridSize: value, 
-      snapToggle: this.state.snapToggle
+      snapToggle: this.state.config.snapToggle
     });
 
     this.setState({
-      gridSize: value,
-      typeScale: typeScale,
+      config: {
+        ...this.state.config,
+        gridSize: value,
+        typeScale: typeScale,
+      }
     });
   }
 
-  handleDefaultLineHeightChange(e) {
-    const value = e.target.value;
-
+  handleDefaultLineHeightChange(value) {
     let typeScale = this.state.typeScale.concat();
     this.setLineHeights(typeScale, {
       defaultLineHeight: value, 
-      gridSize: this.state.gridSize, 
-      snapToggle: this.state.snapToggle
+      gridSize: this.state.config.gridSize, 
+      snapToggle: this.state.config.snapToggle
     });
 
     this.setState({
-      defaultLineHeight: value,
-      typeScale: typeScale,
+      config: {
+        ...this.state.config,
+        defaultLineHeight: value,
+        typeScale: typeScale,
+      }
     });
   }
 
-  handleFontFamilyChange(e) {
-    const value = e.target.value;
+  handleFontFamilyChange(value) {
     this.setState({
-      fontFamily: value
+      config: {
+        ...this.state.config,
+        fontFamily: value
+      }
     });
   }
 
@@ -115,9 +128,9 @@ class App extends React.Component {
 
     if (key === 'size') {
       this.setLineHeights(typeScales, {
-        defaultLineHeight: this.state.defaultLineHeight, 
-        gridSize: this.state.gridSize, 
-        snapToggle: this.state.snapToggle
+        defaultLineHeight: this.state.config.defaultLineHeight, 
+        gridSize: this.state.config.gridSize, 
+        snapToggle: this.state.config.snapToggle
       });
     }
 
@@ -153,59 +166,19 @@ class App extends React.Component {
 
     return (
       <div className="app">
+        
+        <Header />
+
+        <EditToolbar
+          config={this.state.config}
+          onBaseFontChange={this.handleBaseFontChange}
+          onSnapToggleChange={this.handleSnapToggleChange}
+          onGridSizeChange={this.handleGridSizeChange}
+          onDefaultLineHeightChange={this.handleDefaultLineHeightChange}
+          onFontFamilyChange={this.handleFontFamilyChange}
+        />
+
         <section className="app-panel">
-          <h1>Grid-friendly relative line heights for the web</h1>
-          <p>Test and validate your type scale while thinking in CSS pixels (like modern design tools do), snap line heights to a grid (for scalability when working with components), and generate a relative output using <code>rem</code> for font sizes and unitless line heights. <a href="#">Learn more</a>.</p>
-
-          <div className="VRow">
-            <VLabel id="base-font" title="Base size">
-              <VInputField
-                  id="base-font"
-                  onChange={this.handleBaseFontChange}
-                  value={this.state.baseFont}
-                  suffix="px" />
-            </VLabel>
-
-            <VLabel
-              title="Snap to"
-              type="toggle"
-              onChange={this.handleSnapToggleChange}
-              checked={this.state.snapToggle}>
-              <VInputField
-                id="base-grid"
-                isDisabled={!this.state.snapToggle}
-                onChange={this.handleGridSizeChange}
-                value={this.state.gridSize}
-                suffix="px" />
-            </VLabel>
-
-            <VLabel
-              id="line-height"
-              title="Default line height">
-              <VInputField id="line-height"
-                  step="0.1"
-                  onChange={this.handleDefaultLineHeightChange}
-                  value={this.state.defaultLineHeight} />
-            </VLabel>
-          </div>
-
-          <VLabel
-            id="font-family"
-            title="Font family"
-            fullWidth={true}>
-            <VInputField
-                type="text"
-                id="font-family"
-                onChange={this.handleFontFamilyChange}
-                list="fontFamilySuggestions"
-                value={this.state.fontFamily} />
-          </VLabel>
-
-          <datalist id="fontFamilySuggestions">
-            <option value="-apple-system,BlinkMacSystemFont,Segoe UI Variable Text,Segoe UI,Meiryo,system-ui,ui-sans-serif,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji" />
-            <option value="Selawik" />
-            <option value="sans-serif" />
-          </datalist>
 
           <h2 style={{
             marginTop: 16
@@ -214,22 +187,22 @@ class App extends React.Component {
           <TypeScaleEditor
             typeScale={this.state.typeScale}
             onChange={this.handleTypeScaleEditorChange}
-            snapToggle={this.state.snapToggle}
-            gridSize={this.state.gridSize} />
+            snapToggle={this.state.config.snapToggle}
+            gridSize={this.state.config.gridSize} />
 
         </section>
         
         <section className="app-output">
           <SampleGrid
-            gridSize={this.state.gridSize}
+            gridSize={this.state.config.gridSize}
             typeScale={this.state.typeScale}
-            fontFamily={this.state.fontFamily} />
+            fontFamily={this.state.config.fontFamily} />
         </section>
 
         <section className="app-code">
           <CSSOutput
             typeScale={this.state.typeScale}
-            baseFont={this.state.baseFont}
+            baseFont={this.state.config.baseFont}
             />
         </section>
 

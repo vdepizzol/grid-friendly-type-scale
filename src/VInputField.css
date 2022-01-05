@@ -5,21 +5,26 @@
   /*max-width: 8ch;*/
   position: relative;
   font-size: inherit;
-  line-height: var(--ui-line-height);
+  line-height: var(--ui-text-base-line-height);
   border: var(--ui-border-width-thin) solid var(--ui-obj-border);
   border-radius: var(--ui-border-radius-medium);
   background: var(--ui-obj-high);
   display: grid;
   grid-auto-flow: column;
+  grid-template-columns: 1fr auto;
   gap: var(--scale-4);
-  padding: calc(var(--scale-4) - var(--ui-border-width-thin));
+  padding: calc(((var(--scale-32) - var(--ui-text-base-line-box-height)) / 2) - var(--ui-border-width-thin));
+  padding-left: var(--scale-8);
+  padding-right: var(--scale-2);
   cursor: text;
+  width: 80px;
 }
 .VInputField.hidden {
   opacity: 0.25;
 }
 .VInputField.disabled {
   background: var(--ui-obj-low);
+  cursor: default;
 }
 .VInputField.fullWidth {
   width: 100%;
@@ -65,10 +70,12 @@
 
 
 .VInputField .suffix {
-  padding-right: 4px;
+  padding-right: var(--scale-4);
   color: var(--ui-text-low);
-  cursor: text;
   user-select: none;
+}
+.VInputField:not(.disabled) .suffix {
+  cursor: text;
 }
 .VInputField:focus-within .suffix {
   display: none;

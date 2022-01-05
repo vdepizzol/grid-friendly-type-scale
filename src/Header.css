@@ -1,0 +1,21 @@
+#header h1 {
+  font-size: var(--ui-text-title-font-size);
+  line-height: var(--ui-text-title-line-height);
+  letter-spacing: -0.01em;
+  margin: 0 0 var(--scale-8);
+}
+
+#header p {
+  font-size: var(--ui-text-feature-font-size);
+  line-height: var(--ui-text-feature-line-height);
+  color: var(--ui-text-medium);
+  margin: 0;
+  max-width: 70ch;
+}
+
+#header p code {
+  font-family: var(--ui-font-mono-family);
+  padding: 0 var(--scale-4);
+  background: var(--ui-obj-medium);
+  border-radius: var(--ui-border-radius-small);
+}

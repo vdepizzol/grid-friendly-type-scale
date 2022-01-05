@@ -56,6 +56,9 @@ class App extends React.Component {
         baseFont: value.trim() || 0
       }
     });
+
+    const baseFontInPercentage = (value * 100) / 16
+    document.documentElement.style.setProperty('--base-font', baseFontInPercentage + '%');
   }
 
   handleSnapToggleChange(isSnapActive) {

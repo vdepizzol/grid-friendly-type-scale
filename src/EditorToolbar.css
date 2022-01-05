@@ -1,5 +1,5 @@
 .editor-toolbar {
-  background: var(--ui-obj-medium);
+  background: var(--ui-chrome-low);
   display: grid;
   grid-auto-flow: column;
   border-radius: var(--ui-border-radius-large);

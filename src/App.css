@@ -14,7 +14,6 @@
 }
 .app .app-output {
   padding: 0;
-  background: var(--ui-chrome-low);
 }
 .app .app-output .sample-grid {
   overflow: auto;

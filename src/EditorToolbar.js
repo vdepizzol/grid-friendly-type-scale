@@ -46,6 +46,7 @@ class EditorToolbar extends React.Component {
             <VLabel id="base-font" title="Base size">
               <VInputField
                   id="base-font"
+                  isDisabled={true}
                   onChange={this.handleBaseFontChange}
                   value={this.props.config.baseFont}
                   suffix="px" />

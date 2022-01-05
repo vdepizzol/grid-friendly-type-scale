@@ -42,7 +42,7 @@ class TypeScaleEditor extends React.Component {
               onChange={(e) => {
                 this.handleInputChange(typeScaleItem.id, 'title', e.target.value);
               }} />
-              
+
             <VInputField
               key={typeScaleItem.id + '_size'}
               name={'typeScale[' + typeScaleItem.id + '][size]'}
@@ -90,7 +90,7 @@ class TypeScaleEditor extends React.Component {
     });
 
     return (
-      <div>
+      <div className="type-scale-editor">
         {listItems}
       </div>
     );

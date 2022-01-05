@@ -34,6 +34,13 @@
   z-index: 10;
 }
 
+/* ----- */
+
+.type-scale-editor:focus-within .type-scale-item:not(:focus-within) {
+  background: var(--ui-chrome-medium);
+  --ui-text-high: var(--ui-text-medium);
+}
+
 .type-scale-item {
   background: var(--ui-obj-high);
   border-radius: var(--ui-border-radius-large);
@@ -52,7 +59,7 @@
   /*background: none;*/
 }
 .type-scale-item:hover, .type-scale-item:focus-within {
-  background: var(--ui-obj-medium);
+  /*background: var(--ui-obj-medium);*/
 }
 .type-scale-item-toolbar {
   display: flex;

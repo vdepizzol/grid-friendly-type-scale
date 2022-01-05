@@ -1,10 +1,10 @@
 .VInputField {
   --VInputField-border-width: 1px;
-
   box-sizing: border-box;
   /*max-width: 8ch;*/
   position: relative;
   font-size: inherit;
+  color: var(--ui-text-high);
   line-height: var(--ui-text-base-line-height);
   border: var(--ui-border-width-thin) solid var(--ui-obj-border);
   border-radius: var(--ui-border-radius-medium);
@@ -45,6 +45,7 @@
   border: none;
   background: transparent;
   font: inherit;
+  color: inherit;
   line-height: inherit;
   width: 100%;
   box-sizing: border-box;

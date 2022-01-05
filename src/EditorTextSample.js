@@ -41,7 +41,7 @@ class EditorTextSample extends React.Component {
           '--sample-ruler-small': this.rulerSmall,
           '--sample-ruler-large': this.rulerLarge
         }}>
-          {this.props.text} While it’s true that the Dutch and Flemish are avid linguists, a little effort on your part to speak the local language will be warmly received as a sign of good-will.
+          {this.props.text} While it’s true that the Dutch and Flemish are avid linguists, a little effort on your part to speak the local language will be warmly received as a sign of good-will. Phasellus vulputate lectus erat, id elementum urna commodo eget.
         </div>
       </div>
     );

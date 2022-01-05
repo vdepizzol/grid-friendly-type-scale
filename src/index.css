@@ -7,22 +7,29 @@
   --ui-text-invalid: red;
   
   /* UI chrome, backgrounds etc */
-  --ui-chrome-high: #ececec;
-  --ui-chrome-medium: #f4f4f4;
+  --ui-chrome-high: #fff;
+  --ui-chrome-medium: #fff;
   --ui-chrome-low: white;
 
   /* Components & objects */
+  --ui-obj-highest: #fff; /* lighter overlay on dark mode */
   --ui-obj-high: #fff;
-  --ui-obj-medium: #ececec;
-  --ui-obj-low: #ccc;
+  --ui-obj-medium: #f4f4f4;
+  --ui-obj-low: #ececec;
+  --ui-obj-lowest: #ccc;
 
-  --ui-obj-border: #aaa;
+  --ui-obj-border: #D1D1D1;
   --ui-obj-focus: blue;
-  --ui-obj-accent: blue;
+  --ui-obj-anchor: blue;
+  --ui-obj-accent: #FF975C;
 
   /* UI pieces */
   --ui-border-width-thin: 1px;
   --ui-border-width-thick: 2px;
+
+  --ui-border-radius-small: 3px;
+  --ui-border-radius-medium: 6px;
+  --ui-border-radius-large: 12px;
 
   /* Typographic grid */
   --ui-grid-line: rgba(255, 0, 0, 0.06);
@@ -38,18 +45,23 @@
   --scale-24: 1.50rem; /* 24px */
 
   /* Meta typography */
-  --ui-font-size: 0.875rem; /* 14px */
-  --ui-line-height: 1.428571428571428; /* 20px */ /* FIXME */
+  --ui-text-base-font-size: 0.8125rem; /* 12px */
+  --ui-text-base-line-box-height: 1.25rem; /* 20px */
+  --ui-text-base-line-height: calc(20 / 14);
+
   --ui-font-family:
+    Inter,
     -apple-system, BlinkMacSystemFont, /* Apple OSs */
     'Segoe UI Variable Text', 'Segoe UI', 'Meiryo', /* Windows */
     system-ui, ui-sans-serif, Helvetica, sans-serif; /* Linux + fallback */
 }
 
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
+
 body {
   margin: 0;
   font-family: var(--ui-font-family);
-  font-size: var(--ui-font-size);
+  font-size: var(--ui-text-base-font-size);
   color: var(--ui-text-high);
   background: var(--ui-chrome-low);
 }

@@ -7,7 +7,7 @@
   font-size: inherit;
   line-height: var(--ui-line-height);
   border: var(--ui-border-width-thin) solid var(--ui-obj-border);
-  border-radius: 4px;
+  border-radius: var(--ui-border-radius-medium);
   background: var(--ui-obj-high);
   display: grid;
   grid-auto-flow: column;

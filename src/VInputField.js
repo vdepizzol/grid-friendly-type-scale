@@ -44,6 +44,7 @@ class VInputField extends React.Component {
           step={this.props.step}
           min={this.props.min}
           max={this.props.max}
+          {...this.props}
           />
 
         {this.props.suffix &&

@@ -4,6 +4,17 @@ import './VLabel.css';
 class VLabel extends React.Component {
   static #defaultClassNames = 'VLabel';
 
+  
+  handleClick(event) {
+    /*
+    if (event.type == 'mousedown') {
+      
+    } else {
+
+    }
+    */
+  }
+
   render() {
     let labelCheckbox = (this.props.type === 'toggle') ? (
       <input
@@ -16,7 +27,7 @@ class VLabel extends React.Component {
 
     return (
       <div className={ VLabel.#defaultClassNames + ' ' + className}>
-        <label htmlFor={this.props.id}>
+        <label htmlFor={this.props.id} onMouseDown={this.handleClick}>
           {labelCheckbox}
           {this.props.title}:
         </label>

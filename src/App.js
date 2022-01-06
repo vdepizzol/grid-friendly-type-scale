@@ -23,11 +23,11 @@ class App extends React.Component {
         variablePrefix: "text",
       },
       typeScale: [
-        {id: 0, size: 12, title: "Caption", weight: 400},
-        {id: 1, size: 14, title: "Body 1", weight: 400},
-        {id: 2, size: 16, title: "Body 2", weight: 400},
-        {id: 3, size: 18, title: "Subtitle", weight: 600},
-        {id: 4, size: 20, title: "Title", weight: 600},
+        {id: 0, size: 12, title: "caption", weight: 400},
+        {id: 1, size: 14, title: "body-1", weight: 400},
+        {id: 2, size: 16, title: "body-2", weight: 400},
+        {id: 3, size: 18, title: "subtitle", weight: 600},
+        {id: 4, size: 20, title: "title", weight: 600},
       ],
     };
 

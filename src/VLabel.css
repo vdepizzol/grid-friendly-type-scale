@@ -1,6 +1,8 @@
 .VLabel {
   user-select: none;
   width: auto;
+  width: min-content;
+  white-space: nowrap;
 }
 
 .VLabel .VInputField {

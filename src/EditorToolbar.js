@@ -43,13 +43,15 @@ class EditorToolbar extends React.Component {
       return (
         <div className="editor-toolbar">
           <div className="editor-toolbar-base">
-            <VLabel id="base-font" title="Base size">
-              <VInputField
-                  id="base-font"
-                  isDisabled={true}
-                  onChange={this.handleBaseFontChange}
-                  value={this.props.config.baseFont}
-                  suffix="px" />
+
+            <VLabel
+              id="line-height"
+              title="Default line height">
+              <VInputField id="line-height"
+                className={['width-full']}
+                step="0.1"
+                onChange={this.handleDefaultLineHeightChange}
+                value={this.props.config.defaultLineHeight} />
             </VLabel>
 
             <VLabel
@@ -65,13 +67,14 @@ class EditorToolbar extends React.Component {
                 suffix="px" />
             </VLabel>
 
-            <VLabel
-              id="line-height"
-              title="Default line height">
-              <VInputField id="line-height"
-                  step="0.1"
-                  onChange={this.handleDefaultLineHeightChange}
-                  value={this.props.config.defaultLineHeight} />
+            <VLabel id="base-font" title="Base size">
+              <VInputField
+                  id="base-font"
+                  className={['width-sm']}
+                  isDisabled={true}
+                  onChange={this.handleBaseFontChange}
+                  value={this.props.config.baseFont}
+                  suffix="px" />
             </VLabel>
 
             <VLabel
@@ -79,6 +82,7 @@ class EditorToolbar extends React.Component {
               title="Font family">
               <VInputField
                   type="text"
+                  className={['width-md']}
                   id="font-family"
                   onChange={this.handleFontFamilyChange}
                   list="fontFamilySuggestions"
@@ -98,6 +102,7 @@ class EditorToolbar extends React.Component {
               title="Variable prefix">
               <VInputField
                   type="text"
+                  className={['monospace width-md']}
                   id="variable-prefix"
                   /*onChange={this.handleFontFamilyChange}*/
                   value="text" />

@@ -39,6 +39,7 @@ class TypeScaleEditor extends React.Component {
               name={'typeScale[' + typeScaleItem.id + '][title]'}
               type="text"
               value={typeScaleItem.title}
+              className={['monospace width-md']}
               onChange={(e) => {
                 this.handleInputChange(typeScaleItem.id, 'title', e.target.value);
               }} />
@@ -46,6 +47,7 @@ class TypeScaleEditor extends React.Component {
             <VInputField
               key={typeScaleItem.id + '_size'}
               name={'typeScale[' + typeScaleItem.id + '][size]'}
+              className={['width-sm']}
               onChange={(e) => {
                 this.handleInputChange(typeScaleItem.id, 'size', e.target.value);
               }}
@@ -55,6 +57,7 @@ class TypeScaleEditor extends React.Component {
             <VInputField
               key={typeScaleItem.id + '_adjustedLineHeight'}
               name={'typeScale[' + typeScaleItem.id + '][adjustedLineHeight]'}
+              className={['width-sm']}
               type="number"
               step={step}
               onChange={(e) => {
@@ -66,6 +69,7 @@ class TypeScaleEditor extends React.Component {
             <VInputField
               key={typeScaleItem.id + '_weight'}
               name={'typeScale[' + typeScaleItem.id + '][weight]'}
+              className={['width-sm']}
               type="number"
               onChange={(e) => {
                 this.handleInputChange(typeScaleItem.id, 'weight', e.target.value);

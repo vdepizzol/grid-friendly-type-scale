@@ -26,7 +26,22 @@
   background: var(--ui-obj-low);
   cursor: default;
 }
-.VInputField.fullWidth {
+.VInputField.monospace {
+  font-family: var(--ui-font-mono-family);
+}
+
+/* width */
+
+.VInputField.width-sm {
+  width: 8ch;
+}
+.VInputField.width-md {
+  width: 20ch;
+}
+.VInputField.width-lg {
+  width: 32ch;
+}
+.VInputField.width-full {
   width: 100%;
   max-width: none;
 }

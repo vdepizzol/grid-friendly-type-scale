@@ -1,0 +1,189 @@
+.Textbox {
+  box-sizing: border-box;
+  position: relative;
+  font-size: inherit;
+  color: var(--ui-text-high);
+  line-height: var(--ui-text-base-line-height);
+  border: var(--ui-border-width-thin) solid var(--ui-obj-border);
+  border-radius: var(--ui-border-radius-medium);
+  background: var(--ui-obj-high);
+  display: grid;
+  grid-auto-flow: column;
+  grid-template-columns: auto;
+  gap: var(--scale-4);
+  padding: calc(((var(--scale-32) - var(--ui-text-base-line-box-height)) / 2) - var(--ui-border-width-thin));
+  padding-left: var(--scale-8);
+  padding-right: var(--scale-8);
+  cursor: text;
+  width: 8ch;
+  transition: 80ms linear border-color, 160ms linear box-shadow;
+}
+.Textbox:focus-within {
+  padding-right: var(--scale-4);
+}
+.Textbox.hidden {
+  opacity: 0.25;
+}
+.Textbox.disabled {
+  background: var(--ui-obj-low);
+  cursor: default;
+}
+.Textbox.monospace {
+  font-family: var(--ui-font-mono-family);
+}
+
+/* width */
+
+.Textbox.width-sm {
+  width: 8ch;
+}
+.Textbox.width-sm.has-prefix {
+  width: 10ch;
+}
+.Textbox.width-md {
+  width: 20ch;
+}
+.Textbox.width-lg {
+  width: 32ch;
+}
+.Textbox.width-full {
+  width: 100%;
+  max-width: none;
+}
+
+/* Focus */
+
+.Textbox:focus-within {
+  border-color: var(--ui-obj-focus);
+  box-shadow: 0 0 0 1px var(--ui-obj-focus);
+}
+.Textbox input:focus {
+  outline: none;
+}
+
+.Textbox input {
+  border: none;
+  background: transparent;
+  font: inherit;
+  color: inherit;
+  line-height: inherit;
+  width: 100%;
+  padding: 0;
+  box-sizing: border-box;
+  -moz-appearance: textfield;
+}
+
+/* OS elements */
+
+.Textbox input::-webkit-outer-spin-button,
+.Textbox input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
+.Textbox input::-webkit-calendar-picker-indicator {
+  display: none !important;
+}
+
+.Textbox input:invalid {
+  color: var(--ui-text-invalid);
+}
+
+/* Spin buttons */
+
+.Textbox .spin-button {
+  display: block;
+  position: absolute;
+  width: var(--scale-24);
+  height: var(--scale-32);
+  top: calc(var(--ui-border-width-thin) * -1);
+  right: calc(var(--ui-border-width-thin) * -1);
+  display: grid;
+  grid: 1fr 1fr;
+  cursor: pointer;
+  box-sizing: border-box;
+  opacity: 0;
+  
+}
+.Textbox:focus-within .spin-button,
+.Textbox:hover .spin-button {
+  opacity: 1;
+  transition: opacity 80ms linear;
+}
+.Textbox .spin-button > span {
+  display: block;
+  position: relative;
+  font-size: 0;
+}
+
+/*
+.Textbox:focus-within .spin-button .spin-up,
+.Textbox:focus-within .spin-button .spin-down {
+  background: lightskyblue;
+}
+.Textbox:focus-within .spin-button .spin-up {
+  background: lightpink;
+}
+*/
+
+
+.Textbox .spin-button .spin-up > span,
+.Textbox .spin-button .spin-down > span {
+  display: block;
+  display: grid;
+  justify-content: center;
+  align-content: center;
+  height: calc(var(--scale-16) - var(--ui-border-width-thin) - var(--scale-2));
+  border-radius: var(--ui-border-radius-small);
+}
+.Textbox .spin-button .spin-up > span {
+  margin-top: calc(var(--ui-border-width-thin) + var(--scale-2));
+  margin-right: calc(var(--ui-border-width-thin) + var(--scale-2));
+}
+.Textbox .spin-button .spin-down > span {
+  margin-bottom: calc(var(--ui-border-width-thin) + var(--scale-2));
+  margin-right: calc(var(--ui-border-width-thin) + var(--scale-2));
+}
+
+.Textbox .spin-button .spin-up:hover > span,
+.Textbox .spin-button .spin-down:hover > span {
+  background: var(--ui-obj-low);
+}
+.Textbox .spin-button .spin-up:active > span,
+.Textbox .spin-button .spin-down:active > span {
+  background: var(--ui-obj-lowest);
+}
+
+.Textbox .spin-button .spin-up.pressed > span,
+.Textbox .spin-button .spin-down.pressed > span {
+  background: var(--ui-obj-low);
+}
+
+.Textbox .spin-button > span svg {
+  width: var(--scale-8);
+  height: var(--scale-8);
+}
+
+/* Prefix icon */
+
+.Textbox .prefix {
+  padding: calc((var(--ui-text-base-line-box-height) - var(--scale-16)) / 2) 0;
+}
+.Textbox .prefix svg {
+  display: block;
+  width: var(--scale-16);
+  height: var(--scale-16);
+  fill: currentColor;
+}
+
+/* Suffix */
+
+.Textbox .suffix {
+  color: var(--ui-text-low);
+  user-select: none;
+}
+.Textbox:not(.disabled) .suffix {
+  cursor: text;
+}
+.Textbox:focus-within .suffix,
+.Textbox:hover .suffix {
+  display: none;
+}

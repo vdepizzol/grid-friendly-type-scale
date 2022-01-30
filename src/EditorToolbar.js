@@ -1,6 +1,8 @@
 import React from 'react';
-import VInputField from './VInputField';
-import VLabel from './VLabel';
+import Textbox from './common/Textbox';
+import TextboxLabel from './common/TextboxLabel';
+import {ReactComponent as LineHeightIcon} from './icons/line-height.svg';
+import {ReactComponent as GridSnapIcon} from './icons/grid-snap.svg';
 import './EditorToolbar.css';
 
 class EditorToolbar extends React.Component {
@@ -44,50 +46,53 @@ class EditorToolbar extends React.Component {
         <div className="editor-toolbar">
           <div className="editor-toolbar-base">
 
-            <VLabel
+            <TextboxLabel
               id="line-height"
               title="Default line height">
-              <VInputField id="line-height"
-                className={['width-full']}
+              <Textbox
+                id="line-height"
+                width="full"
                 step="0.1"
+                prefixIcon={<LineHeightIcon />}
                 onChange={this.handleDefaultLineHeightChange}
                 value={this.props.config.defaultLineHeight} />
-            </VLabel>
+            </TextboxLabel>
 
-            <VLabel
+            <TextboxLabel id="base-font" title="Base size">
+              <Textbox
+                  id="base-font"
+                  width="sm"
+                  onChange={this.handleBaseFontChange}
+                  value={this.props.config.baseFont}
+                  suffix="px" />
+            </TextboxLabel>
+
+            <TextboxLabel
               title="Snap to"
               type="toggle"
               onChange={this.handleSnapToggleChange}
               checked={this.props.config.snapToggle}>
-              <VInputField
+              <Textbox
                 id="base-grid"
+                width="sm"
+                prefixIcon={<GridSnapIcon />}
                 isDisabled={!this.props.config.snapToggle}
                 onChange={this.handleGridSizeChange}
                 value={this.props.config.gridSize}
                 suffix="px" />
-            </VLabel>
+            </TextboxLabel>
 
-            <VLabel id="base-font" title="Base size">
-              <VInputField
-                  id="base-font"
-                  className={['width-sm']}
-                  isDisabled={true}
-                  onChange={this.handleBaseFontChange}
-                  value={this.props.config.baseFont}
-                  suffix="px" />
-            </VLabel>
-
-            <VLabel
+            <TextboxLabel
               id="font-family"
               title="Font family">
-              <VInputField
+              <Textbox
                   type="text"
                   className={['width-md']}
                   id="font-family"
                   onChange={this.handleFontFamilyChange}
                   list="fontFamilySuggestions"
                   value={this.props.config.fontFamily} />
-            </VLabel>
+            </TextboxLabel>
 
             <datalist id="fontFamilySuggestions">
               <option value="-apple-system,BlinkMacSystemFont,Segoe UI Variable Text,Segoe UI,Meiryo,system-ui,ui-sans-serif,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji" />
@@ -97,16 +102,16 @@ class EditorToolbar extends React.Component {
           </div>
 
           <div className="editor-toolbar-output">
-          <VLabel
+          <TextboxLabel
               id="variable-prefix"
               title="Variable prefix">
-              <VInputField
+              <Textbox
                   type="text"
                   className={['monospace width-md']}
                   id="variable-prefix"
                   /*onChange={this.handleFontFamilyChange}*/
                   value="text" />
-            </VLabel>
+            </TextboxLabel>
 
           </div>
         </div>

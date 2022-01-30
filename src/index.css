@@ -60,6 +60,7 @@
   --ui-text-title-line-box-height: 2.50rem; /* 40px */
   --ui-text-title-line-height: calc(40 / 28);
 
+  
 
   --ui-font-family:
     Inter,
@@ -73,6 +74,10 @@
 }
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+::selection {
+  background-color: rgba(42, 192, 192, 0.308);
+}
 
 body {
   margin: 0;

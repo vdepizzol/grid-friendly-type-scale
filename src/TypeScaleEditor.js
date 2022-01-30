@@ -1,6 +1,7 @@
 import React from 'react';
 import EditorTextSample from './EditorTextSample';
-import VInputField from './VInputField';
+import Textbox from './common/Textbox';
+import {ReactComponent as LineHeightIcon} from './icons/line-height.svg';
 import './TypeScaleEditor.css';
 
 class TypeScaleEditor extends React.Component {
@@ -34,47 +35,44 @@ class TypeScaleEditor extends React.Component {
       return (
         <div class="type-scale-item">
           <div class="type-scale-item-toolbar">
-            <VInputField
+            <Textbox
               key={typeScaleItem.id + '_title'}
-              name={'typeScale[' + typeScaleItem.id + '][title]'}
               type="text"
               value={typeScaleItem.title}
-              className={['monospace width-md']}
+              className={['monospace']}
+              width="md"
               onChange={(e) => {
                 this.handleInputChange(typeScaleItem.id, 'title', e.target.value);
               }} />
 
-            <VInputField
+            <Textbox
               key={typeScaleItem.id + '_size'}
-              name={'typeScale[' + typeScaleItem.id + '][size]'}
-              className={['width-sm']}
+              width="sm"
               onChange={(e) => {
                 this.handleInputChange(typeScaleItem.id, 'size', e.target.value);
               }}
               value={typeScaleItem.size}
               suffix="px" />
             
-            <VInputField
+            <Textbox
               key={typeScaleItem.id + '_adjustedLineHeight'}
-              name={'typeScale[' + typeScaleItem.id + '][adjustedLineHeight]'}
-              className={['width-sm']}
               type="number"
               step={step}
+              width="sm"
+              prefixIcon={<LineHeightIcon />}
               onChange={(e) => {
                 this.handleInputChange(typeScaleItem.id, 'adjustedLineHeight', e.target.value);
               }}
               value={typeScaleItem.adjustedLineHeight}
               suffix="px" />
 
-            <VInputField
+            <Textbox
               key={typeScaleItem.id + '_weight'}
-              name={'typeScale[' + typeScaleItem.id + '][weight]'}
               className={['width-sm']}
               type="number"
               onChange={(e) => {
                 this.handleInputChange(typeScaleItem.id, 'weight', e.target.value);
               }}
-              placeholder="inherit"
               value={typeScaleItem.weight}
               step="100"
               min="100"

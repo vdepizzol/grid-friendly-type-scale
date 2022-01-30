@@ -4,6 +4,7 @@
 }
 
 .editor-ruler {
+  display: grid;
   position: relative;
   padding-left: var(--scale-16);
   padding-bottom: 1px;
@@ -14,10 +15,21 @@
   font-size: var(--sample-font-size);
   line-height: var(--sample-line-height);
   font-weight: var(--sample-font-weight);
-  max-width: 55ch;
+  /*max-width: 55ch;*/
+}
+
+.editor-ruler::after, .editor-ruler textarea {
+  grid-area: 1 / 1 / 2 / 2;
+}
+
+.editor-ruler::after {
+  content: attr(data-replicated-value) " ";
+  white-space: pre-wrap;
+  visibility: hidden;
 }
 
 .editor-ruler textarea {
+  display: block;
   font-family: inherit;
   font-size: inherit;
   font-weight: inherit;
@@ -28,4 +40,5 @@
   resize: none;
   outline: none;
   width: 100%;
+  overflow: hidden;
 }

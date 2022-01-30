@@ -1,6 +1,6 @@
 //import logo from './logo.svg';
 import React from 'react';
-import Header from './Header';
+import Header from './common/Header';
 import EditorToolbar from './EditorToolbar';
 import EditorTextSample from './EditorTextSample';
 import SampleGrid from './SampleGrid';

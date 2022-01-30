@@ -17,7 +17,7 @@
   border: 1px solid #ccc;
 }
 
-.TypeScaleEditor td .VInputField {
+.TypeScaleEditor td .Textbox {
   width: 100%;
   border-radius: 0;
   border: none;
@@ -26,7 +26,7 @@
   background: #ccc;
   border-radius: 3px;
 }
-.TypeScaleEditor td .VInputField:focus-within {
+.TypeScaleEditor td .Textbox:focus-within {
   box-shadow: 0 0 0 1px var(--ui-obj-focus);
   box-shadow: 0 0 0 1px var(--ui-obj-focus), 0 0 0 4px rgba(0, 0, 255, 0.2);
   border-radius: 2px;

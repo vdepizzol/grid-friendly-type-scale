@@ -1,8 +1,8 @@
 import React from 'react';
-import './VLabel.css';
+import './TextboxLabel.css';
 
-class VLabel extends React.Component {
-  static #defaultClassNames = 'VLabel';
+class TextboxLabel extends React.Component {
+  static #defaultClassNames = 'TextboxLabel';
 
   
   handleClick(event) {
@@ -26,7 +26,7 @@ class VLabel extends React.Component {
     let className = (this.props.fullWidth) ? 'fullWidth' : '';
 
     return (
-      <div className={ VLabel.#defaultClassNames + ' ' + className}>
+      <div className={ TextboxLabel.#defaultClassNames + ' ' + className}>
         <label htmlFor={this.props.id} onMouseDown={this.handleClick}>
           {labelCheckbox}
           {this.props.title}:
@@ -37,4 +37,4 @@ class VLabel extends React.Component {
   }
 }
 
-export default VLabel;
+export default TextboxLabel;

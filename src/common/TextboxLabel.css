@@ -1,24 +1,24 @@
-.VLabel {
+.TextboxLabel {
   user-select: none;
   width: auto;
   width: min-content;
   white-space: nowrap;
 }
 
-.VLabel .VInputField {
+.TextboxLabel .Textbox {
   margin-top: var(--scale-4);
 }
 
-.VLabel.fullWidth {
+.TextboxLabel.fullWidth {
   width: 100%;
 }
 
-.VLabel.fullWidth .VInputField {
+.TextboxLabel.fullWidth .Textbox {
   width: 100%;
   max-width: none;
   box-sizing: border-box;
 }
-.VLabel input[type="checkbox"] {
+.TextboxLabel input[type="checkbox"] {
   accent-color: var(--accent);
   margin: 0 var(--scale-4) 0 0;
   position: relative;
@@ -26,7 +26,7 @@
   height: var(--scale-12);
   vertical-align: baseline;
 }
-.VLabel input[type="checkbox"]:after {
+.TextboxLabel input[type="checkbox"]:after {
   content: "";
   position: absolute;
   background: transparent;

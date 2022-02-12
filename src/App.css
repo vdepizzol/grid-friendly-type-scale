@@ -9,7 +9,7 @@
 
 .app-main {
   display: grid;
-  grid-template-columns: 2fr 1fr;
+  grid-template-columns: 1fr 1fr;
   gap: var(--scale-24);
 }
 .app .app-output {
@@ -25,7 +25,15 @@
 /* app-code */
 
 .app .app-output {
-  font-family: monospace;
+
+}
+
+.app .app-output .Output {
+  background: var(--ui-obj-high);
+  border-radius: var(--ui-border-radius-large);
+  padding: var(--scale-16) var(--scale-16) var(--scale-20);
+  font-size: 0.875rem;
+  font-family: var(--ui-font-mono-family);
   white-space: pre;
-  color: #FF6B3E;
+  color: #521d0d;
 }

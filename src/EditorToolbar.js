@@ -33,12 +33,17 @@ class EditorToolbar extends React.Component {
     return this.props.onFontFamilyChange(e.target.value);
   }
 
+  handleVariablePrefixChange(e) {
+    return this.props.handleVariablePrefixChange(e.target.value);
+  }
+
   bindHandlersToContext() {
     this.handleBaseFontChange = this.handleBaseFontChange.bind(this);
     this.handleSnapToggleChange = this.handleSnapToggleChange.bind(this);
     this.handleGridSizeChange = this.handleGridSizeChange.bind(this);
     this.handleDefaultLineHeightChange = this.handleDefaultLineHeightChange.bind(this);
     this.handleFontFamilyChange = this.handleFontFamilyChange.bind(this);
+    this.handleVariablePrefixChange = this.handleVariablePrefixChange.bind(this);
   }
 
   render() {
@@ -84,10 +89,11 @@ class EditorToolbar extends React.Component {
 
             <TextboxLabel
               id="font-family"
-              title="Font family">
+              title="Font family"
+              fullWidth>
               <Textbox
                   type="text"
-                  className={['width-md']}
+                  width="full"
                   id="font-family"
                   onChange={this.handleFontFamilyChange}
                   list="fontFamilySuggestions"
@@ -102,17 +108,27 @@ class EditorToolbar extends React.Component {
           </div>
 
           <div className="editor-toolbar-output">
-          <TextboxLabel
-              id="variable-prefix"
-              title="Variable prefix">
-              <Textbox
-                  type="text"
-                  className={['monospace width-md']}
-                  id="variable-prefix"
-                  /*onChange={this.handleFontFamilyChange}*/
-                  value="text" />
+            
+
+            <TextboxLabel
+                id="output-type"
+                title="Output">
+                <select className='Textbox width-md'>
+                  <option>CSS variables</option>
+                  <option>CSS classes</option>
+                </select>
             </TextboxLabel>
 
+            <TextboxLabel
+                id="variable-prefix"
+                title="Variable prefix">
+                <Textbox
+                    type="text"
+                    className={['monospace width-md']}
+                    id="variable-prefix"
+                    onChange={this.handleVariablePrefixChange}
+                    value="text" />
+            </TextboxLabel>
           </div>
         </div>
       );

@@ -9,6 +9,7 @@ class CSSOutput extends React.Component {
     this.convertToFriendlyClassName = this.convertToFriendlyClassName.bind(this);
     this.convertFontSizeToRem = this.convertFontSizeToRem.bind(this);
     this.convertLineHeightToUnitless = this.convertLineHeightToUnitless.bind(this);
+    this.convertPixelsToRem = this.convertPixelsToRem.bind(this);
   }
 
   convertBaseFontToPercentage(baseFont) {
@@ -28,20 +29,46 @@ class CSSOutput extends React.Component {
     return 'calc(' + lineHeight + ' / ' + fontSize + ')';
   }
 
+  convertPixelsToRem(size, baseFont) {
+    return size / baseFont;
+  }
+
   render() {
 
-    const root = ':root {' + "\n  " + 'font-size: ' + this.convertBaseFontToPercentage(this.props.baseFont) + "%;\n}" + "\n";
+    let variables = [];
+    let classes = [];
+    let variablePrefix = this.convertToFriendlyClassName(this.props.variablePrefix);
 
-    const listItems = this.props.typeScale.map((typeScaleItem) => {
-      let output = '.' + this.convertToFriendlyClassName(typeScaleItem.title) + " { \n";
-      output += "  font-size: " + this.convertFontSizeToRem(typeScaleItem.size, this.props.baseFont) + "rem; /* " + typeScaleItem.size + "px */ \n";
-      output += "  line-height: " + this.convertLineHeightToUnitless(typeScaleItem.adjustedLineHeight, typeScaleItem.size) + "; \n";
-      output += "}\n \n";
-      return output;
+    let loop = this.props.typeScale.map((item) => {
+      console.log('a');
+      const name = this.convertToFriendlyClassName(item.title);
+      const fontSize = this.convertFontSizeToRem(item.size, this.props.baseFont);
+      const fontWeight = item.weight;
+      const lineHeight = this.convertLineHeightToUnitless(item.adjustedLineHeight, item.size);
+      const lineBox = this.convertPixelsToRem(item.adjustedLineHeight, this.props.baseFont);
+
+      // process information before applying syntax highlighting classes
+
+      variables.push(`  --${variablePrefix}-${name}-font-size: ${fontSize}rem; /* ${item.size}px */
+  --${variablePrefix}-${name}-font-weight: ${fontWeight};
+  --${variablePrefix}-${name}-line-height: ${lineHeight};
+  --${variablePrefix}-${name}-line-box: ${lineBox}rem; /* ${item.adjustedLineHeight}px */`);
+
+      classes.push(`.${this.convertToFriendlyClassName(item.title)} {
+  font-size: ${this.convertFontSizeToRem(item.size, this.props.baseFont)}rem; /* ${item.size}px */
+  line-height: ${this.convertLineHeightToUnitless(item.adjustedLineHeight, item.size)};
+}`);
     });
 
+    const root = `:root {
+  font-size: ${this.convertBaseFontToPercentage(this.props.baseFont)}%;
+  
+${variables.join("\n\n")}
+}
 
-    return root + listItems;
+${classes.join("\n\n")}`;
+
+    return root;
   }
 }
 

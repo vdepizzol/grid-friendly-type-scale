@@ -6,12 +6,29 @@ class EditorTextSample extends React.Component {
   constructor(props) {
     super(props);
     this.textareaRef = React.createRef();
+    this.textSampleOrder = 8;
 
     this.state = {
-      value: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum auctor pharetra odio. Sed sollicitudin odio ac justo sagittis, quis dapibus sapien cursus. In leo massa, lacinia sit amet ipsum vitae, imperdiet aliquet lectus. Ut sollicitudin in diam in finibus. Praesent porta commodo eros eu mattis. Proin quis placerat nunc. Duis at condimentum urna, vitae vestibulum turpis. Phasellus vulputate lectus erat, id elementum urna commodo eget.',
+      value: this.generateTextSample(),
     };
 
     this.handleChange = this.handleChange.bind(this);
+  }
+
+  generateTextSample() {
+    // needs to place this somewhere else to be shared.
+    const textSamples = [
+      'Aesthetic-Usability Effect: Users often perceive aesthetically pleasing design as design that’s more usable.',
+      'Doherty Threshold: Productivity soars when a computer and its users interact at a pace (<400ms) that ensures that neither has to wait on the other.',
+      'Fitts’s Law: The time to acquire a target is a function of the distance to and size of the target.',
+      'Goal-Gradient Effect: The tendency to approach a goal increases with proximity to the goal.',
+      'Hick’s Law: The time it takes to make a decision increases with the number and complexity of choices.',
+      'Jakob’s Law: Users spend most of their time on other sites. This means that users prefer your site to work the same way as all the other sites they already know.',
+      'Law of Common Region: Elements tend to be perceived into groups if they are sharing an area with a clearly defined boundary.',
+      'Law of Proximity: Objects that are near, or proximate to each other, tend to be grouped together.',
+      'Law of Prägnanz: People will perceive and interpret ambiguous or complex images as the simplest form possible, because it is the interpretation that requires the least cognitive effort of us.',
+    ];
+    return textSamples[this.textSampleOrder];
   }
 
   handleChange(event) {

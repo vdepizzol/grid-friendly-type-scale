@@ -28,6 +28,10 @@ class App extends React.Component {
         {id: 2, size: 16, title: "body-2", weight: 400},
         {id: 3, size: 18, title: "subtitle", weight: 600},
         {id: 4, size: 20, title: "title", weight: 600},
+
+        // weight
+        // computedLineHeight
+        // adjustedLineHeight
       ],
     };
 
@@ -46,6 +50,8 @@ class App extends React.Component {
     this.handleDefaultLineHeightChange = this.handleDefaultLineHeightChange.bind(this);
     this.handleFontFamilyChange = this.handleFontFamilyChange.bind(this);
     this.handleTypeScaleEditorChange = this.handleTypeScaleEditorChange.bind(this);
+
+    this.handleVariablePrefixChange = this.handleVariablePrefixChange.bind(this);
   }
 
   //#region [ handlers ]
@@ -138,6 +144,16 @@ class App extends React.Component {
 
     this.setState({typeScale: typeScales});   
   }
+
+  handleVariablePrefixChange(value) {
+    this.setState({
+      config: {
+        ...this.state.config,
+        variablePrefix: value
+      }
+    });
+  }
+
   //#endregion
 
   //#region [ helper methods ]
@@ -182,6 +198,7 @@ class App extends React.Component {
             onGridSizeChange={this.handleGridSizeChange}
             onDefaultLineHeightChange={this.handleDefaultLineHeightChange}
             onFontFamilyChange={this.handleFontFamilyChange}
+            handleVariablePrefixChange={this.handleVariablePrefixChange}
           />
         </div>
 
@@ -203,10 +220,13 @@ class App extends React.Component {
           </div>
 
           <div className="app-output">
-            <CSSOutput
-              typeScale={this.state.typeScale}
-              baseFont={this.state.config.baseFont}
-              />
+            <div class="Output">
+              <CSSOutput
+                typeScale={this.state.typeScale}
+                baseFont={this.state.config.baseFont}
+                variablePrefix={this.state.config.variablePrefix}
+                />
+            </div>
           </div>
         </div>
       </div>

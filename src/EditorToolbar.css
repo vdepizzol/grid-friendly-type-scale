@@ -4,7 +4,7 @@
   grid-auto-flow: column;
   gap: var(--scale-24);
   border-radius: var(--ui-border-radius-large);
-  grid-template-columns: 2fr 1fr;
+  grid-template-columns: 1fr 1fr;
   transition: 80ms linear box-shadow;
 }
 
@@ -17,10 +17,13 @@
   flex-flow: row;
   gap: var(--scale-16);
   padding: var(--scale-16);
+  padding-right: 0;
 }
 
 .editor-toolbar-output {
-  background: transparent;
+  display: flex;
+  flex-flow: row;
+  gap: var(--scale-16);
   padding: var(--scale-16);
   padding-left: 0;
 }

@@ -23,11 +23,12 @@ class App extends React.Component {
         variablePrefix: "text",
       },
       typeScale: [
-        {id: 0, size: 12, title: "caption", weight: 400},
-        {id: 1, size: 14, title: "body-1", weight: 400},
-        {id: 2, size: 16, title: "body-2", weight: 400},
-        {id: 3, size: 18, title: "subtitle", weight: 600},
-        {id: 4, size: 20, title: "title", weight: 600},
+        {id: 0, size: 32, title: "hero", weight: 400},
+        {id: 1, size: 24, title: "title", weight: 600},
+        {id: 2, size: 18, title: "subtitle", weight: 500},
+        {id: 3, size: 16, title: "bodyLarge", weight: 400},
+        {id: 4, size: 14, title: "body", weight: 400},
+        {id: 5, size: 12, title: "caption", weight: 400},
 
         // weight
         // computedLineHeight

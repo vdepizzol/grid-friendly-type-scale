@@ -1,6 +1,8 @@
 .editor-text-sample {
+  position: relative;
   padding-left: 0;
   padding-right: var(--scale-16);
+  overflow: hidden;
 }
 
 .editor-ruler {
@@ -9,13 +11,16 @@
   padding-left: var(--scale-16);
   padding-bottom: 1px;
   color: var(--ui-text-high);
-  background-size: 8px var(--sample-ruler-large), 4px var(--sample-ruler-small);
-  background-image: linear-gradient(to bottom, var(--ui-obj-accent) 1px, transparent 1px), linear-gradient(to bottom, var(--ui-obj-border) 1px, transparent 1px);
-  background-repeat: repeat-y, repeat-y;
   font-size: var(--sample-font-size);
   line-height: var(--sample-line-height);
   font-weight: var(--sample-font-weight);
   /*max-width: 55ch;*/
+}
+
+.type-scale-item:focus-within .editor-ruler {
+  background-size: 8px var(--sample-ruler-large), 4px var(--sample-ruler-small);
+  background-image: linear-gradient(to bottom, var(--ui-obj-accent) 1px, transparent 1px), linear-gradient(to bottom, var(--ui-obj-border) 1px, transparent 1px);
+  background-repeat: repeat-y, repeat-y;
 }
 
 .editor-ruler::after, .editor-ruler textarea {
@@ -30,6 +35,7 @@
 
 .editor-ruler textarea {
   display: block;
+  background: transparent;
   font-family: inherit;
   font-size: inherit;
   font-weight: inherit;
@@ -41,4 +47,23 @@
   outline: none;
   width: 100%;
   overflow: hidden;
+}
+
+.editor-hover-line {
+  display: none;
+  background: #f4f4f4;
+  width: 100%;
+  height: var(--sample-ruler-large);
+  position: absolute;
+  top: 0;
+  left: 0;
+  box-sizing: content-box;
+  box-shadow: inset 0 1px 0 #ececec;
+  border-bottom: 1px solid #ececec;
+}
+
+.type-scale-item:focus-within .editor-hover-line {
+  background: #FFEBE2;
+  box-shadow: inset 0 1px 0 #FFCDB1;
+  border-bottom: 1px solid #FFCDB1;
 }

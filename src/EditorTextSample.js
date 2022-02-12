@@ -6,6 +6,8 @@ class EditorTextSample extends React.Component {
   constructor(props) {
     super(props);
     this.textareaRef = React.createRef();
+    this.hoverLineRef = React.createRef();
+
     this.textSampleOrder = 8;
 
     this.state = {
@@ -13,6 +15,9 @@ class EditorTextSample extends React.Component {
     };
 
     this.handleChange = this.handleChange.bind(this);
+    this.handleMouseOver = this.handleMouseOver.bind(this);
+    this.handleMouseMove = this.handleMouseMove.bind(this);
+    this.handleMouseOut = this.handleMouseOut.bind(this);
   }
 
   generateTextSample() {
@@ -36,6 +41,29 @@ class EditorTextSample extends React.Component {
     this.textareaRef.current.parentNode.dataset.replicatedValue = event.target.value;
   }
 
+  handleMouseOver(event) {
+    console.log('over');
+    this.hoverLineRef.current.style.display = 'block';
+  }
+
+  handleMouseMove(event) {
+    const bounds = event.target.getBoundingClientRect();
+    const y = event.clientY - bounds.top;
+
+    const lineBox = this.props.lineHeight;
+    console.log(lineBox);
+
+    const lineTop = Math.floor(y / lineBox) * lineBox;
+    console.log('move', lineTop, y);
+    this.hoverLineRef.current.style.top = `${lineTop}px`;
+  }
+
+  handleMouseOut(event) {
+    console.log('out');
+    this.hoverLineRef.current.style.top = '0';
+    this.hoverLineRef.current.style.display = 'none';
+  }
+
   render() {
     this.fontSize = (this.props.fontSize / this.props.config.baseFont) + 'rem';
     this.lineHeight = 'calc(' + this.props.lineHeight + ' / ' + this.props.fontSize + ')';
@@ -48,16 +76,22 @@ class EditorTextSample extends React.Component {
     this.rulerLarge = (this.props.lineHeight / this.props.config.baseFont) + 'rem';
 
     return (
-      <div className="editor-text-sample">
-        <div class="editor-ruler"
+      <div
+        className="editor-text-sample"
+        style={{
+          '--sample-font-size': this.fontSize,
+          '--sample-line-height': this.lineHeight,
+          '--sample-font-weight': this.fontWeight,
+          '--sample-ruler-small': this.rulerSmall,
+          '--sample-ruler-large': this.rulerLarge
+        }}
+      >
+        <span ref={this.hoverLineRef} className="editor-hover-line"></span>
+        <div className="editor-ruler"
           data-replicated-value={this.state.value}
-          style={{
-            '--sample-font-size': this.fontSize,
-            '--sample-line-height': this.lineHeight,
-            '--sample-font-weight': this.fontWeight,
-            '--sample-ruler-small': this.rulerSmall,
-            '--sample-ruler-large': this.rulerLarge
-          }}
+          onMouseOver={this.handleMouseOver}
+          onMouseMove={this.handleMouseMove}
+          onMouseOut={this.handleMouseOut}
         >
           <textarea
             autoCorrect={false}

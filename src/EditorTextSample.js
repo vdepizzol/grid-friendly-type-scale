@@ -1,4 +1,5 @@
 import React from 'react';
+import * as helpers from './helpers';
 import './EditorTextSample.css';
 
 class EditorTextSample extends React.Component {
@@ -42,24 +43,18 @@ class EditorTextSample extends React.Component {
   }
 
   handleMouseOver(event) {
-    console.log('over');
     this.hoverLineRef.current.style.display = 'block';
   }
 
   handleMouseMove(event) {
     const bounds = event.target.getBoundingClientRect();
     const y = event.clientY - bounds.top;
-
     const lineBox = this.props.lineHeight;
-    console.log(lineBox);
-
-    const lineTop = Math.floor(y / lineBox) * lineBox;
-    console.log('move', lineTop, y);
+    const lineTop = helpers.floorToGrid(y, lineBox);
     this.hoverLineRef.current.style.top = `${lineTop}px`;
   }
 
   handleMouseOut(event) {
-    console.log('out');
     this.hoverLineRef.current.style.top = '0';
     this.hoverLineRef.current.style.display = 'none';
   }

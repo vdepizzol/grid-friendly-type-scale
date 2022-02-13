@@ -16,12 +16,30 @@ class TypeScaleEditor extends React.Component {
 
   bindHandlersToContext() {
     this.handleInputChange = this.handleInputChange.bind(this);
+    this.handleFocus = this.handleFocus.bind(this);
+    this.handleBlur = this.handleBlur.bind(this);
   }
-
 
   handleInputChange(id, name, value) {
     if (name != 'title') value = +value;
     this.props.onChange(id, name, value);
+  }
+
+  handleFocus(event, id) {
+    console.log('focus', event);
+    this.highlightOutput(id);
+  }
+
+  handleBlur(event, id) {
+    console.log('blur', event);
+  }
+
+  highlightOutput(id) {
+    console.log('id', id);
+  }
+
+  removeOutputHighlight() {
+    // TODO
   }
 
   render() {
@@ -33,7 +51,16 @@ class TypeScaleEditor extends React.Component {
       }
 
       return (
-        <div class="type-scale-item">
+        <div
+          className="type-scale-item"
+          onFocus={(e) => {
+            console.log('wait wat');
+            this.handleFocus(e, typeScaleItem.id);
+          }}
+          onBlur={(e) => {
+            console.log('blur');
+            this.handleBlur(e, typeScaleItem.id);
+          }}>
           <div class="type-scale-item-toolbar">
             <Textbox
               key={typeScaleItem.id + '_title'}
@@ -80,6 +107,7 @@ class TypeScaleEditor extends React.Component {
           </div>
 
           <EditorTextSample
+            uid={typeScaleItem.id}
             config={this.props.config}
             text={typeScaleItem.title}
             fontSize={typeScaleItem.size}

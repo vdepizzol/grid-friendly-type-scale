@@ -29,7 +29,7 @@
 
   --ui-border-radius-small: 3px;
   --ui-border-radius-medium: 6px;
-  --ui-border-radius-large: 12px;
+  --ui-border-radius-large: 8px;
 
   /* Typographic grid */
   --ui-grid-line: rgba(255, 0, 0, 0.06);
@@ -60,16 +60,14 @@
   --ui-text-title-line-box-height: 2.50rem; /* 40px */
   --ui-text-title-line-height: calc(40 / 28);
 
-  
-
   --ui-font-family:
-    Inter,
+  Inter,
     -apple-system, BlinkMacSystemFont, /* Apple OSs */
     'Segoe UI Variable Text', 'Segoe UI', 'Meiryo', /* Windows */
-    system-ui, ui-sans-serif, Helvetica, sans-serif; /* Linux + fallback */
+    Roboto, 'Oxygen-Sans', Cantarell, /* Android & Linux */
+    "Helvetica Neue", sans-serif; /* Fallback */
 
-  --ui-font-mono-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-  monospace;
+  --ui-font-mono-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 
   font-size: var(--base-font);
 }

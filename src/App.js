@@ -6,6 +6,7 @@ import EditorTextSample from './EditorTextSample';
 import SampleGrid from './SampleGrid';
 import CSSOutput from './CSSOutput';
 import TypeScaleEditor from './TypeScaleEditor';
+import * as helpers from './helpers';
 import './App.css';
 
 class App extends React.Component {
@@ -50,7 +51,10 @@ class App extends React.Component {
     this.handleGridSizeChange = this.handleGridSizeChange.bind(this);
     this.handleDefaultLineHeightChange = this.handleDefaultLineHeightChange.bind(this);
     this.handleFontFamilyChange = this.handleFontFamilyChange.bind(this);
+
     this.handleTypeScaleEditorChange = this.handleTypeScaleEditorChange.bind(this);
+    this.handleTypeScaleEditorFocus = this.handleTypeScaleEditorFocus.bind(this);
+    this.handleTypeScaleEditorBlur = this.handleTypeScaleEditorBlur.bind(this);
 
     this.handleVariablePrefixChange = this.handleVariablePrefixChange.bind(this);
   }
@@ -64,8 +68,12 @@ class App extends React.Component {
       }
     });
 
-    const baseFontInPercentage = (value * 100) / 16
-    document.documentElement.style.setProperty('--base-font', baseFontInPercentage + '%');
+    const baseFontInPercentage = (value * 100) / 16;
+    const bodyFontInRem = ((16 * 100) / value) / 100;
+    
+    // bring these values to the css output, not to the current `document`.
+    //document.documentElement.style.setProperty('--base-font', baseFontInPercentage + '%');
+    //document.querySelector('body').style.fontSize = `${bodyFontInRem}rem`;
   }
 
   handleSnapToggleChange(isSnapActive) {
@@ -127,6 +135,8 @@ class App extends React.Component {
         fontFamily: value
       }
     });
+
+    document.documentElement.style.setProperty('--font-family', value);
   }
 
   handleTypeScaleEditorChange(id, key, value) {
@@ -146,6 +156,14 @@ class App extends React.Component {
     this.setState({typeScale: typeScales});   
   }
 
+  handleTypeScaleEditorFocus(id) {
+    console.log('focou-se', id);
+  }
+
+  handleTypeScaleEditorBlur(id) {
+    console.log('emaeceu-se', id);
+  }
+
   handleVariablePrefixChange(value) {
     this.setState({
       config: {
@@ -158,24 +176,17 @@ class App extends React.Component {
   //#endregion
 
   //#region [ helper methods ]
-  roundToGrid(number, gridSize) {
-    return Math.round(number / gridSize) * gridSize;
-  }
-
-  computeDefaultLineHeight(fontSize, lineHeight) {
-    return fontSize * lineHeight;
-  }
 
   //typescales, scale properties {newLineHeight, newGridSize, isSnapActive}
   setLineHeights(typeScales, scaleProps) {
     const {defaultLineHeight, gridSize, snapToggle: isSnapActive} = scaleProps;
     
     typeScales.forEach(item => {
-      const computedLineHeight = this.computeDefaultLineHeight(item.size, defaultLineHeight);
+      const computedLineHeight = helpers.computeDefaultLineHeight(item.size, defaultLineHeight);
       item.computedLineHeight = computedLineHeight;
 
       item.adjustedLineHeight = (isSnapActive)
-        ? this.roundToGrid(computedLineHeight, gridSize)
+        ? helpers.roundToGrid(computedLineHeight, gridSize)
         : item.computedLineHeight;
     });
   }
@@ -209,6 +220,8 @@ class App extends React.Component {
               config={this.state.config}
               typeScale={this.state.typeScale}
               onChange={this.handleTypeScaleEditorChange}
+              onFocus={this.handleTypeScaleEditorFocus}
+              onBlur={this.handleTypeScaleEditorFocus}
               snapToggle={this.state.config.snapToggle}
               gridSize={this.state.config.gridSize} />
 

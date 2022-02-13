@@ -53,6 +53,24 @@
   border-top: none !important;
   padding-top: var(--ui-border-width-thin);
 }
+/*
+node conector
+.type-scale-item:focus-within:after {
+  content: "";
+  position: absolute;
+  display: block;
+  width: 8px;
+  height: 8px;
+  border-radius: 100%;
+  top: 50%;
+  right: -4px;
+  background: var(--accent);
+}
+*/
+
+.type-scale-item:focus-within + .type-scale-item {
+  border-top-color: transparent;
+}
 
 .type-scale-item {
   background: var(--ui-obj-high);

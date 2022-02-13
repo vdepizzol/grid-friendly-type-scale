@@ -40,7 +40,6 @@ class CSSOutput extends React.Component {
     let variablePrefix = this.convertToFriendlyClassName(this.props.variablePrefix);
 
     let loop = this.props.typeScale.map((item) => {
-      console.log('a');
       const name = this.convertToFriendlyClassName(item.title);
       const fontSize = this.convertFontSizeToRem(item.size, this.props.baseFont);
       const fontWeight = item.weight;
@@ -48,6 +47,18 @@ class CSSOutput extends React.Component {
       const lineBox = this.convertPixelsToRem(item.adjustedLineHeight, this.props.baseFont);
 
       // process information before applying syntax highlighting classes
+
+      const itemVariable = `  --${variablePrefix}-${name}-font-size: ${fontSize}rem; /* ${item.size}px */
+  --${variablePrefix}-${name}-font-weight: ${fontWeight};
+  --${variablePrefix}-${name}-line-height: ${lineHeight};
+  --${variablePrefix}-${name}-line-box: ${lineBox}rem; /* ${item.adjustedLineHeight}px */`;
+
+      return (
+        <>
+          <div className={'output-' + item.id}>{itemVariable}</div>
+          {"\n"}
+        </>
+      );
 
       variables.push(`  --${variablePrefix}-${name}-font-size: ${fontSize}rem; /* ${item.size}px */
   --${variablePrefix}-${name}-font-weight: ${fontWeight};
@@ -68,7 +79,8 @@ ${variables.join("\n\n")}
 
 ${classes.join("\n\n")}`;
 
-    return root;
+    //return root;
+    return loop;
   }
 }
 

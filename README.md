@@ -9,7 +9,6 @@ This tool lets you tweak your type scale in pixels (like Figma does!), and gener
 - [ ] About
   - [ ] Review project name + description
   - [ ] How it works section
-  - [ ] 
 - [ ] Code legibility
 	- [ ] Normalize CSS classes
 	- [ ] Normalize React component names

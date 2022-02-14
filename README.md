@@ -2,7 +2,7 @@
 
 ✨ Currently in progress ✨
 
-This tool lets you generate your type scale in `rem`, with unitless line heights, while thinking of it in pixels (like modern design tools such as Figma do).
+This tool lets you tweak your type scale in pixels (like Figma does!), and generates a reusable output with font sizes set in `rem` units, and unitless line heights.
 
 ## To do
 

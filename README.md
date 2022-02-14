@@ -1,14 +1,18 @@
 # Grid-friendly type scale
 
+✨ Currently in progress ✨
+
 This tool lets you generate your type scale in `rem`, with unitless line heights, while thinking of it in pixels (like modern design tools such as Figma do).
 
 ## To do
 
+- [ ] About
+  - [ ] Review project name + description
+  - [ ] How it works section
+  - [ ] 
 - [ ] Code legibility
 	- [ ] Normalize CSS classes
 	- [ ] Normalize React component names
-	- [ ] Review project name + description
-
 - [ ] Input control
 	- [x] Input icons
 	- [x] Input widths
@@ -24,6 +28,8 @@ This tool lets you generate your type scale in `rem`, with unitless line heights
 	- [ ] Delete button
 	- [ ] Add button
 	- [ ] Empty state
+  - [ ] Font family selector
+  - [ ] Preview default text
 - [ ] Output
 	- [x] Variable prefix
 	- [ ] Correct CSS output
@@ -38,7 +44,7 @@ This tool lets you generate your type scale in `rem`, with unitless line heights
 	- [ ] Local storage
 - [ ] Responsive design
 	- [ ] No hover adjustments
-	- [ ] Smaller screens??
+	- [ ] Smaller screens
 
 ### Commands
 

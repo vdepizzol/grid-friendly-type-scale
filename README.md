@@ -2,6 +2,44 @@
 
 This tool lets you generate your type scale in `rem`, with unitless line heights, while thinking of it in pixels (like modern design tools such as Figma do).
 
+## To do
+
+- [ ] Code legibility
+	- [ ] Normalize CSS classes
+	- [ ] Normalize React component names
+	- [ ] Review project name + description
+
+- [ ] Input control
+	- [x] Input icons
+	- [x] Input widths
+		- [x] Match label width
+		- [x] Compact width for numbers, relaxed for text
+	- [x] Monospaced variant
+	- [ ] spin-up/down functionality
+	- [ ] Select dropdown component
+- [ ] Type scale
+	- [x] Mouseover line preview
+	- [x] Editable sample text
+		- [x] Auto-height textarea
+	- [ ] Delete button
+	- [ ] Add button
+	- [ ] Empty state
+- [ ] Output
+	- [x] Variable prefix
+	- [ ] Correct CSS output
+	- [ ] Simple syntax highlight
+	- [ ] Emphasis on the active part of the code being edited
+	- [ ] Different output options
+		- [ ] Json
+- [ ] Form validation
+	- [ ] Invalid number
+	- [ ] Minimum line height = font size
+- [ ] Storage
+	- [ ] Local storage
+- [ ] Responsive design
+	- [ ] No hover adjustments
+	- [ ] Smaller screens??
+
 ### Commands
 
 - `npm start`  

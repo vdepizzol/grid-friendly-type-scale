@@ -1,6 +1,6 @@
 # Grid-friendly relative line heights for the web
 
-Generate rem font sizes and unitless line heights (for the browser), while thinking of your type scale in pixels (as in modern software design tools).
+Generate `rem` font sizes and `unitless` line heights, while thinking of your type scale in pixels (like modern design tools such as Figma do).
 
 ### `npm start`
 

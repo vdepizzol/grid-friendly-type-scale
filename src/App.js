@@ -57,6 +57,9 @@ class App extends React.Component {
     this.handleTypeScaleEditorBlur = this.handleTypeScaleEditorBlur.bind(this);
 
     this.handleVariablePrefixChange = this.handleVariablePrefixChange.bind(this);
+
+    this.handleAddTypeScaleItem = this.handleAddTypeScaleItem.bind(this);
+    this.handleRemoveTypeScaleItem = this.handleRemoveTypeScaleItem.bind(this);
   }
 
   //#region [ handlers ]
@@ -173,6 +176,14 @@ class App extends React.Component {
     });
   }
 
+  handleAddTypeScaleItem() {
+    alert('add')
+  }
+
+  handleRemoveTypeScaleItem(id) {
+    alert(`remove ${id}`);
+  }
+
   //#endregion
 
   //#region [ helper methods ]
@@ -223,7 +234,8 @@ class App extends React.Component {
               onFocus={this.handleTypeScaleEditorFocus}
               onBlur={this.handleTypeScaleEditorFocus}
               snapToggle={this.state.config.snapToggle}
-              gridSize={this.state.config.gridSize} />
+              gridSize={this.state.config.gridSize}
+              removeItem={this.handleRemoveTypeScaleItem} />
 
             {/*
             <SampleGrid

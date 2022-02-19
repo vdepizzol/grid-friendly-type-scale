@@ -89,7 +89,7 @@ class EditorTextSample extends React.Component {
           onMouseOut={this.handleMouseOut}
         >
           <textarea
-            autoCorrect={false}
+            autoCorrect="off"
             ref={this.textareaRef}
             onChange={this.handleChange}
             value={this.state.value} />

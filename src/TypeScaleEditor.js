@@ -1,8 +1,10 @@
 import React from 'react';
 import EditorTextSample from './EditorTextSample';
 import Textbox from './common/Textbox';
-import {ReactComponent as LineHeightIcon} from './icons/line-height.svg';
+import IconButton from './common/IconButton';
 import './TypeScaleEditor.css';
+import {ReactComponent as LineHeightIcon} from './icons/line-height.svg';
+import {ReactComponent as TrashIcon} from './icons/trash.svg';
 
 class TypeScaleEditor extends React.Component {
   static #defaultClassNames = 'TypeScaleEditor';
@@ -18,6 +20,8 @@ class TypeScaleEditor extends React.Component {
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleFocus = this.handleFocus.bind(this);
     this.handleBlur = this.handleBlur.bind(this);
+
+    this.handleRemove = this.handleRemove.bind(this);
   }
 
   handleInputChange(id, name, value) {
@@ -38,6 +42,11 @@ class TypeScaleEditor extends React.Component {
     console.log('id', id);
   }
 
+  handleRemove(id) {
+    console.log('handle remove', id);
+    this.props.removeItem(id);
+  }
+
   removeOutputHighlight() {
     // TODO
   }
@@ -52,6 +61,7 @@ class TypeScaleEditor extends React.Component {
 
       return (
         <div
+          key={typeScaleItem.id}
           className="type-scale-item"
           onFocus={(e) => {
             console.log('wait wat');
@@ -61,7 +71,7 @@ class TypeScaleEditor extends React.Component {
             console.log('blur');
             this.handleBlur(e, typeScaleItem.id);
           }}>
-          <div class="type-scale-item-toolbar">
+          <div className="type-scale-item-toolbar">
             <Textbox
               key={typeScaleItem.id + '_title'}
               type="text"
@@ -104,6 +114,14 @@ class TypeScaleEditor extends React.Component {
               step="100"
               min="100"
               max="900" />
+
+            <IconButton
+              label="Delete"
+              icon={<TrashIcon />}
+              onClick={(e) => {
+                this.handleRemove(typeScaleItem.id);
+              }}
+            />
           </div>
 
           <EditorTextSample

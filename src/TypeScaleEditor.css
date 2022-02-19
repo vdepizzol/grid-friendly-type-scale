@@ -100,3 +100,6 @@ node conector
   gap: var(--scale-8);
   padding: var(--scale-16);
 }
+.type-scale-item-toolbar .IconButton {
+  margin-left: auto;
+}

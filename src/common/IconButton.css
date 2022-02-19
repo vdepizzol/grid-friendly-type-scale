@@ -1,0 +1,21 @@
+.IconButton {
+  height: var(--scale-32);
+  width: var(--scale-32);
+  padding: var(--scale-8);
+  background: transparent;
+  border-radius: var(--ui-border-radius-medium);
+  border: none;
+  cursor: pointer;
+  transition: background-color 80ms linear, box-shadow 80ms linear;
+}
+.IconButton:hover {
+  background: var(--ui-obj-low);
+}
+.IconButton:focus {
+  box-shadow: 0 0 0 2px var(--ui-obj-focus);
+  outline: none;
+}
+.IconButton svg {
+  width: var(--scale-16);
+  height: var(--scale-16);
+}

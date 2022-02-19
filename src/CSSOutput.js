@@ -55,7 +55,9 @@ class CSSOutput extends React.Component {
 
       return (
         <>
-          <div className={'output-' + item.id}>{itemVariable}</div>
+          <div 
+          key={item.id}
+          className={'output-' + item.id}>{itemVariable}</div>
           {"\n"}
         </>
       );

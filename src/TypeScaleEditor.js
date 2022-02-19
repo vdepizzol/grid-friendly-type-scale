@@ -44,7 +44,7 @@ class TypeScaleEditor extends React.Component {
 
   handleRemove(id) {
     console.log('handle remove', id);
-    this.props.removeItem(id);
+    this.props.handleRemoveItem(id);
   }
 
   removeOutputHighlight() {
@@ -78,15 +78,17 @@ class TypeScaleEditor extends React.Component {
               value={typeScaleItem.title}
               className={['monospace']}
               width="md"
-              onChange={(e) => {
-                this.handleInputChange(typeScaleItem.id, 'title', e.target.value);
+              onChange={(value) => {
+                this.handleInputChange(typeScaleItem.id, 'title', value);
               }} />
 
             <Textbox
               key={typeScaleItem.id + '_size'}
               width="sm"
-              onChange={(e) => {
-                this.handleInputChange(typeScaleItem.id, 'size', e.target.value);
+              min="8"
+              max="128"
+              onChange={(value) => {
+                this.handleInputChange(typeScaleItem.id, 'size', value);
               }}
               value={typeScaleItem.size}
               suffix="px" />
@@ -95,10 +97,12 @@ class TypeScaleEditor extends React.Component {
               key={typeScaleItem.id + '_adjustedLineHeight'}
               type="number"
               step={step}
+              min={typeScaleItem.size}
+              max={typeScaleItem.size * 3}
               width="sm"
               prefixIcon={<LineHeightIcon />}
-              onChange={(e) => {
-                this.handleInputChange(typeScaleItem.id, 'adjustedLineHeight', e.target.value);
+              onChange={(value) => {
+                this.handleInputChange(typeScaleItem.id, 'adjustedLineHeight', value);
               }}
               value={typeScaleItem.adjustedLineHeight}
               suffix="px" />
@@ -107,8 +111,8 @@ class TypeScaleEditor extends React.Component {
               key={typeScaleItem.id + '_weight'}
               className={['width-sm']}
               type="number"
-              onChange={(e) => {
-                this.handleInputChange(typeScaleItem.id, 'weight', e.target.value);
+              onChange={(value) => {
+                this.handleInputChange(typeScaleItem.id, 'weight', value);
               }}
               value={typeScaleItem.weight}
               step="100"

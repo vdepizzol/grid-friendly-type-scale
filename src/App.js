@@ -6,6 +6,7 @@ import EditorTextSample from './EditorTextSample';
 import SampleGrid from './SampleGrid';
 import CSSOutput from './CSSOutput';
 import TypeScaleEditor from './TypeScaleEditor';
+import AddTypeScaleItem from './AddTypeScaleItem';
 import * as helpers from './helpers';
 import './App.css';
 
@@ -178,10 +179,17 @@ class App extends React.Component {
 
   handleAddTypeScaleItem() {
     alert('add')
+    this.setState({
+      typeScale: [...this.state.typeScale, {id: 9, title: 'new', size: 48, weight: 200}]
+    });
   }
 
   handleRemoveTypeScaleItem(id) {
-    alert(`remove ${id}`);
+    this.setState({
+      typeScale: this.state.typeScale.filter((typeScale, typeScaleIndex) => {
+        return typeScale.id != id;
+      })
+    });
   }
 
   //#endregion
@@ -235,14 +243,9 @@ class App extends React.Component {
               onBlur={this.handleTypeScaleEditorFocus}
               snapToggle={this.state.config.snapToggle}
               gridSize={this.state.config.gridSize}
-              removeItem={this.handleRemoveTypeScaleItem} />
+              handleRemoveItem={this.handleRemoveTypeScaleItem} />
 
-            {/*
-            <SampleGrid
-              gridSize={this.state.config.gridSize}
-              typeScale={this.state.typeScale}
-              fontFamily={this.state.config.fontFamily} />
-            */}
+            <AddTypeScaleItem handleAddItem={this.handleAddTypeScaleItem} />
           </div>
 
           <div className="app-output">

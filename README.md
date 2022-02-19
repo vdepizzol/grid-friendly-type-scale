@@ -24,7 +24,7 @@ This tool lets you tweak your type scale in pixels (like Figma does!), and gener
 	- [x] Mouseover line preview
 	- [x] Editable sample text
 		- [x] Auto-height textarea
-	- [ ] Delete button
+	- [x] Delete button
 	- [ ] Add button
 	- [ ] Empty state
   - [ ] Font family selector

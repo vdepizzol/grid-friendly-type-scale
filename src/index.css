@@ -7,6 +7,7 @@
   --ui-text-invalid: red;
   
   /* UI chrome, backgrounds etc */
+  /* FIXME: rename to `surface` */
   --ui-chrome-high: #fff;
   --ui-chrome-medium: #f4f4f4;
   --ui-chrome-low: #ececec;

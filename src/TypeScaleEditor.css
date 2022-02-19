@@ -38,21 +38,23 @@
 
 .type-scale-editor:focus-within .type-scale-item:not(:focus-within) {
   /*background: var(--ui-chrome-medium);*/
-  opacity: 0.75;
+  /*opacity: 0.6;*/
   --ui-text-high: var(--ui-text-medium);
 }
 .type-scale-item:focus-within {
   position: relative;
   z-index: 1;
   box-shadow: inset 0 0 0 var(--ui-border-width-thin) var(--ui-obj-border), 0 6px 24px rgba(0, 0, 0, 0.06);
+  box-shadow: 0 0 0 2px var(--ui-obj-focus);
   border-radius: var(--ui-border-radius-large) !important;
-  margin-left: calc(var(--scale-8) * -1);
+  /* margin-left: calc(var(--scale-8) * -1);
   margin-right: calc(var(--scale-8) * -1);
   padding-left: var(--scale-8);
-  padding-right: var(--scale-8);
+  padding-right: var(--scale-8); */
   border-top: none !important;
   padding-top: var(--ui-border-width-thin);
 }
+
 /*
 node conector
 .type-scale-item:focus-within:after {

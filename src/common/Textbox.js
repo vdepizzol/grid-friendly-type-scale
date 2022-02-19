@@ -27,26 +27,23 @@ class Textbox extends React.Component {
   }
 
   handleChange(e) {
-    this.setState({
-      value: e.target.value
-    });
+    this.updateValue(+e.target.value);
+    // this.setState({
+    //   value: e.target.value
+    // });
 
-    this.props.onChange(e);
+    // this.props.onChange(e);
   }
 
   handleKeyDown(e) {
     console.log(e, e.code);
-    if (e.code == 'ArrowUp') {
-      this.setState({
-        spinUpPressed: true
-      });
-    }
-    
-    if (e.code == 'ArrowDown') {
-      this.setState({
-        spinDownPressed: true
-      });
-    }
+
+    let stateUpdate = {
+      spinUpPressed: e.code === 'ArrowUp',
+      spinDownPressed: e.code === 'ArrowDown',
+    };
+
+    this.setState(stateUpdate);
   }
 
   handleKeyUp(e) {
@@ -68,10 +65,11 @@ class Textbox extends React.Component {
 
     const step = parseFloat(this.props.step || 1);
 
-    this.setState({
-      value: this.state.value + step,
-    });
+    // this.setState({
+    //   value: this.state.value + step,
+    // });
 
+    this.updateValue(this.state.value + step);
     // needs to trigger `change` event
   }
 
@@ -83,12 +81,30 @@ class Textbox extends React.Component {
 
     const step = parseFloat(this.props.step || 1);
     
-    this.setState({
-      value: this.state.value - step,
-    });
+    // this.setState({
+    //   value: this.state.value - step,
+    // });
+    this.updateValue(this.state.value - step);
 
     // needs to trigger `change` event
 
+  }
+
+  updateValue(value) {
+    if (value !== 0) {
+      value = Math.max(
+        +this.props.min,
+        Math.min(+this.props.max, value)
+      );
+  
+      
+    }
+    
+    this.setState({
+      value: value || '',
+    });
+
+    if (value !== 0) this.props.onChange(value);
   }
 
   render() {
@@ -130,7 +146,8 @@ class Textbox extends React.Component {
 
         {type == 'number' &&
           <span className="spin-button">
-            <span className={`spin-up ${this.state.spinUpPressed ? " pressed" : ""}`} onMouseDown={this.handleSpinUp}>
+            <span className={`spin-up ${this.state.spinUpPressed ? " pressed" : ""}`} 
+                  onMouseDown={this.handleSpinUp}>
               <span>
                 <SpinUpIcon />
               </span>

@@ -6,7 +6,7 @@
   line-height: var(--ui-text-base-line-height);
   border: var(--ui-border-width-thin) solid var(--ui-obj-border);
   border-radius: var(--ui-border-radius-medium);
-  background: var(--ui-obj-high);
+  background: var(--ui-obj-highest);
   display: grid;
   grid-auto-flow: column;
   grid-template-columns: auto;
@@ -25,7 +25,7 @@
   opacity: 0.25;
 }
 .Textbox.disabled {
-  background: var(--ui-obj-low);
+  background: var(--ui-obj-medium);
   cursor: default;
 }
 .Textbox.monospace {
@@ -145,16 +145,16 @@
 
 .Textbox .spin-button .spin-up:hover > span,
 .Textbox .spin-button .spin-down:hover > span {
-  background: var(--ui-obj-low);
+  background: var(--ui-obj-medium);
 }
 .Textbox .spin-button .spin-up:active > span,
 .Textbox .spin-button .spin-down:active > span {
-  background: var(--ui-obj-lowest);
+  background: var(--ui-obj-low);
 }
 
 .Textbox .spin-button .spin-up.pressed > span,
 .Textbox .spin-button .spin-down.pressed > span {
-  background: var(--ui-obj-low);
+  background: var(--ui-obj-medium);
 }
 
 .Textbox .spin-button > span svg {

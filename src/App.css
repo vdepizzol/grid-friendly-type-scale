@@ -31,7 +31,7 @@
 }
 
 .app .app-output .Output {
-  background: var(--ui-obj-high);
+  background: var(--ui-surface-high);
   border-radius: var(--ui-border-radius-large);
   padding: var(--scale-16) var(--scale-16) var(--scale-20);
   font-size: 0.875rem;

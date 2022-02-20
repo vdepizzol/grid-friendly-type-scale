@@ -9,7 +9,7 @@
   transition: background-color 80ms linear, box-shadow 80ms linear;
 }
 .IconButton:hover {
-  background: var(--ui-obj-low);
+  background: var(--ui-obj-medium);
 }
 .IconButton:focus {
   box-shadow: 0 0 0 2px var(--ui-obj-focus);

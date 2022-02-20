@@ -16,6 +16,6 @@
 #header p code {
   font-family: var(--ui-font-mono-family);
   padding: 0 var(--scale-4);
-  background: var(--ui-obj-low);
+  background: var(--ui-obj-medium);
   border-radius: var(--ui-border-radius-small);
 }

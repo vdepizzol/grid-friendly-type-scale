@@ -4,20 +4,20 @@
   --ui-text-high: rgba(0, 0, 0, 0.9);
   --ui-text-medium: rgba(0, 0, 0, 0.68);
   --ui-text-low: rgba(0, 0, 0, 0.48);
-  --ui-text-invalid: red;
+  --ui-text-invalid: #D70404;
   
-  /* UI chrome, backgrounds etc */
-  /* FIXME: rename to `surface` */
-  --ui-chrome-high: #fff;
-  --ui-chrome-medium: #f4f4f4;
-  --ui-chrome-low: #ececec;
+  /* UI surface, backgrounds etc */
+  --ui-surface-highest: #fff; /* lighter overlay on dark mode */
+  --ui-surface-high: #fff;
+  --ui-surface-medium: #f4f4f4;
+  --ui-surface-low: #ececec;
 
   /* Components & objects */
-  --ui-obj-highest: #fff; /* lighter overlay on dark mode */
-  --ui-obj-high: #fff;
-  --ui-obj-medium: #f4f4f4;
-  --ui-obj-low: #ececec;
-  --ui-obj-lowest: #ccc;
+  --ui-obj-highest: #fff; 
+  --ui-obj-high: #f4f4f4;
+  --ui-obj-medium: #ececec;
+  --ui-obj-low: #ccc;
+  --ui-obj-lowest: rgb(124, 124, 124);
 
   --ui-obj-border: #D1D1D1;
   --ui-obj-focus: #6A2ABC;
@@ -62,7 +62,7 @@
   --ui-text-title-line-height: calc(40 / 28);
 
   --ui-font-family:
-  Inter,
+    Inter,
     -apple-system, BlinkMacSystemFont, /* Apple OSs */
     'Segoe UI Variable Text', 'Segoe UI', 'Meiryo', /* Windows */
     Roboto, 'Oxygen-Sans', Cantarell, /* Android & Linux */
@@ -84,7 +84,7 @@ body {
   font-family: var(--ui-font-family);
   font-size: var(--ui-text-base-font-size);
   color: var(--ui-text-high);
-  background: var(--ui-chrome-medium);
+  background: var(--ui-surface-medium);
   color: var(--ui-text-high);
 }
 

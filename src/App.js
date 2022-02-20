@@ -25,12 +25,12 @@ class App extends React.Component {
         variablePrefix: "text",
       },
       typeScale: [
-        {id: 0, size: 32, title: "hero", weight: 400},
-        {id: 1, size: 24, title: "title", weight: 600},
-        {id: 2, size: 18, title: "subtitle", weight: 500},
-        {id: 3, size: 16, title: "bodyLarge", weight: 400},
-        {id: 4, size: 14, title: "body", weight: 400},
-        {id: 5, size: 12, title: "caption", weight: 400},
+        {id: 0, size: 32, title: "hero", weight: 400, isActive: false},
+        {id: 1, size: 24, title: "title", weight: 600, isActive: false},
+        {id: 2, size: 18, title: "subtitle", weight: 500, isActive: false},
+        {id: 3, size: 16, title: "bodyLarge", weight: 400, isActive: false},
+        {id: 4, size: 14, title: "body", weight: 400, isActive: false},
+        {id: 5, size: 12, title: "caption", weight: 400, isActive: false},
 
         // weight
         // computedLineHeight
@@ -54,8 +54,9 @@ class App extends React.Component {
     this.handleFontFamilyChange = this.handleFontFamilyChange.bind(this);
 
     this.handleTypeScaleEditorChange = this.handleTypeScaleEditorChange.bind(this);
-    this.handleTypeScaleEditorFocus = this.handleTypeScaleEditorFocus.bind(this);
-    this.handleTypeScaleEditorBlur = this.handleTypeScaleEditorBlur.bind(this);
+    this.handleTypeScaleEditorActiveChange = this.handleTypeScaleEditorActiveChange.bind(this);
+    //this.handleTypeScaleEditorFocus = this.handleTypeScaleEditorFocus.bind(this);
+    //this.handleTypeScaleEditorBlur = this.handleTypeScaleEditorBlur.bind(this);
 
     this.handleVariablePrefixChange = this.handleVariablePrefixChange.bind(this);
 
@@ -160,12 +161,8 @@ class App extends React.Component {
     this.setState({typeScale: typeScales});   
   }
 
-  handleTypeScaleEditorFocus(id) {
-    console.log('focou-se', id);
-  }
-
-  handleTypeScaleEditorBlur(id) {
-    console.log('emaeceu-se', id);
+  handleTypeScaleEditorActiveChange(id) {
+    this.updateTypeScaleItemActive(id);
   }
 
   handleVariablePrefixChange(value) {
@@ -178,9 +175,16 @@ class App extends React.Component {
   }
 
   handleAddTypeScaleItem() {
-    alert('add')
+    const newId = this.getNextTypeScaleItemId();
+    const newTypeScaleItem = {
+      id: newId,
+      title: '',
+      size: 24,
+      weight: 400
+    };
+
     this.setState({
-      typeScale: [...this.state.typeScale, {id: 9, title: 'new', size: 48, weight: 200}]
+      typeScale: [...this.state.typeScale, newTypeScaleItem]
     });
   }
 
@@ -197,10 +201,10 @@ class App extends React.Component {
   //#region [ helper methods ]
 
   //typescales, scale properties {newLineHeight, newGridSize, isSnapActive}
-  setLineHeights(typeScales, scaleProps) {
+  setLineHeights(typeScale, scaleProps) {
     const {defaultLineHeight, gridSize, snapToggle: isSnapActive} = scaleProps;
     
-    typeScales.forEach(item => {
+    typeScale.forEach(item => {
       const computedLineHeight = helpers.computeDefaultLineHeight(item.size, defaultLineHeight);
       item.computedLineHeight = computedLineHeight;
 
@@ -208,6 +212,32 @@ class App extends React.Component {
         ? helpers.roundToGrid(computedLineHeight, gridSize)
         : item.computedLineHeight;
     });
+  }
+
+  updateTypeScaleItemActive(id) {
+    const typeScale = this.state.typeScale ?? [];
+
+    this.setState({
+      typeScale: this.setTypeScaleItemActive(typeScale, id)
+    });
+  }
+
+  setTypeScaleItemActive(typeScale, id) {
+    typeScale.previousActiveItem = typeScale.activeItem;
+
+    typeScale.forEach(item => {
+      item.isActive = item.id === id;
+      if (item.isActive) {
+        typeScale.activeItem = item;
+      }
+    });
+
+    return typeScale;
+  }
+
+  getNextTypeScaleItemId() {
+    const currentMaxId = this.state.typeScale.reduce((prev, curr) => (curr > prev) ? curr : prev, 0)
+    return currentMaxId + 1;
   }
   //#endregion
 
@@ -239,11 +269,13 @@ class App extends React.Component {
               config={this.state.config}
               typeScale={this.state.typeScale}
               onChange={this.handleTypeScaleEditorChange}
-              onFocus={this.handleTypeScaleEditorFocus}
-              onBlur={this.handleTypeScaleEditorFocus}
+              //onFocus={this.handleTypeScaleEditorFocus}
+              //onBlur={this.handleTypeScaleEditorFocus}
+              onActiveChange={this.handleTypeScaleEditorActiveChange}
               snapToggle={this.state.config.snapToggle}
               gridSize={this.state.config.gridSize}
-              handleRemoveItem={this.handleRemoveTypeScaleItem} />
+              handleRemoveItem={this.handleRemoveTypeScaleItem} 
+              />
 
             <AddTypeScaleItem handleAddItem={this.handleAddTypeScaleItem} />
           </div>

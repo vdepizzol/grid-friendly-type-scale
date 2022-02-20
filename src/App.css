@@ -25,7 +25,9 @@
 /* app-code */
 
 .app .app-output {
-
+  max-height: 50vh;
+  position: sticky;
+  top: 0;
 }
 
 .app .app-output .Output {
@@ -36,4 +38,12 @@
   font-family: var(--ui-font-mono-family);
   white-space: pre;
   color: #521d0d;
+}
+
+.app .app-output .code-highlight {
+  background: rgba(91, 0, 207, 0.08);
+  padding: var(--scale-4);
+  margin: calc(var(--scale-4) * -1);
+  border-radius: var(--ui-border-radius-medium);
+
 }

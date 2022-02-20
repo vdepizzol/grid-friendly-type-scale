@@ -13,28 +13,28 @@ class EditorToolbar extends React.Component {
     this.bindHandlersToContext();
   }
 
-  handleBaseFontChange(e) {
-    return this.props.onBaseFontChange(e.target.value);
+  handleBaseFontChange(value) {
+    return this.props.onBaseFontChange(value);
   }
 
   handleSnapToggleChange(e) {
     return this.props.onSnapToggleChange(e.target.checked);
   }
 
-  handleGridSizeChange(e) {
-    return this.props.onGridSizeChange(e.target.value);
+  handleGridSizeChange(value) {
+    return this.props.onGridSizeChange(value);
   }
 
-  handleDefaultLineHeightChange(e) {
-    return this.props.onDefaultLineHeightChange(e.target.value);
+  handleDefaultLineHeightChange(value) {
+    return this.props.onDefaultLineHeightChange(value);
   }
 
-  handleFontFamilyChange(e) {
-    return this.props.onFontFamilyChange(e.target.value);
+  handleFontFamilyChange(value) {
+    return this.props.onFontFamilyChange(value);
   }
 
-  handleVariablePrefixChange(e) {
-    return this.props.handleVariablePrefixChange(e.target.value);
+  handleVariablePrefixChange(value) {
+    return this.props.handleVariablePrefixChange(value);
   }
 
   bindHandlersToContext() {
@@ -60,7 +60,9 @@ class EditorToolbar extends React.Component {
                 step="0.1"
                 prefixIcon={<LineHeightIcon />}
                 onChange={this.handleDefaultLineHeightChange}
-                value={this.props.config.defaultLineHeight} />
+                value={this.props.config.defaultLineHeight}
+                min="1"
+                max="2" />
             </TextboxLabel>
 
             <TextboxLabel id="base-font" title="Base size">

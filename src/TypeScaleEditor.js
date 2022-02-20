@@ -31,20 +31,24 @@ class TypeScaleEditor extends React.Component {
 
   handleFocus(event, id) {
     console.log('focus', event);
-    this.highlightOutput(id);
+    this.props.onActiveChange(id);
   }
 
   handleBlur(event, id) {
     console.log('blur', event);
-  }
-
-  highlightOutput(id) {
-    console.log('id', id);
+    this.props.onActiveChange();
   }
 
   handleRemove(id) {
     console.log('handle remove', id);
     this.props.handleRemoveItem(id);
+  }
+
+  handleClickToFocus(event, id) {
+    console.log('click', event.target.classList.contains('type-scale-item-toolbar'), event);
+    if (!event.target.classList.contains('type-scale-item-toolbar')) return;
+
+    this.props.onActiveChange(id);
   }
 
   removeOutputHighlight() {
@@ -70,7 +74,12 @@ class TypeScaleEditor extends React.Component {
           onBlur={(e) => {
             console.log('blur');
             this.handleBlur(e, typeScaleItem.id);
+          }}
+          onClick={(e) => {
+            console.log('click');
+            this.handleClickToFocus(e, typeScaleItem.id);
           }}>
+            
           <div className="type-scale-item-toolbar">
             <Textbox
               key={typeScaleItem.id + '_title'}
@@ -127,16 +136,18 @@ class TypeScaleEditor extends React.Component {
               }}
             />
           </div>
-
-          <EditorTextSample
-            uid={typeScaleItem.id}
-            config={this.props.config}
-            text={typeScaleItem.title}
-            fontSize={typeScaleItem.size}
-            lineHeight={typeScaleItem.adjustedLineHeight}
-            fontWeight={typeScaleItem.weight}
-            rulerSmall={4}
-            rulerLarge={20} />
+          <label className="editor-text-sample-wrapper">
+            <EditorTextSample
+              config={this.props.config}
+              item={typeScaleItem}
+              uid={typeScaleItem.id}
+              text={typeScaleItem.title}
+              fontSize={typeScaleItem.size}
+              lineHeight={typeScaleItem.adjustedLineHeight}
+              fontWeight={typeScaleItem.weight}
+              rulerSmall={4}
+              rulerLarge={20} />
+          </label>
         </div>
       );
     });

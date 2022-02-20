@@ -16,23 +16,13 @@ class Textbox extends React.Component {
       spinDownPressed: false,
     };
 
-    this.handleChange = this.handleChange.bind(this);
-    this.handleKeyDown = this.handleKeyDown.bind(this);
-    this.handleKeyUp = this.handleKeyUp.bind(this);
-    this.handleDoubleClick = this.handleDoubleClick.bind(this);
-    this.handleSpinUp = this.handleSpinUp.bind(this);
-    this.handleSpinDown = this.handleSpinDown.bind(this);
+    this.inputElementRef = React.createRef();
 
-    this.inputElement = React.createRef();
+    this.stopPropagation = this.stopPropagation.bind(this);
   }
 
   handleChange(e) {
-    this.updateValue(+e.target.value);
-    // this.setState({
-    //   value: e.target.value
-    // });
-
-    // this.props.onChange(e);
+    this.updateValue(e.target.value);
   }
 
   handleKeyDown(e) {
@@ -58,6 +48,7 @@ class Textbox extends React.Component {
   }
 
   handleSpinUp(e) {
+    console.log('spin up', e);
     e.preventDefault();
 
     // FIXME
@@ -69,11 +60,12 @@ class Textbox extends React.Component {
     //   value: this.state.value + step,
     // });
 
-    this.updateValue(this.state.value + step);
+    this.updateValue(+this.state.value + step);
     // needs to trigger `change` event
   }
 
   handleSpinDown(e) {
+    console.log('spin down', e);
     e.preventDefault();
 
     // FIXME
@@ -90,21 +82,43 @@ class Textbox extends React.Component {
 
   }
 
+  handleFocusOut() {
+    console.log('focusOut');
+    this.updateValue(this.state.value);
+  }
+
   updateValue(value) {
-    if (value !== 0) {
+    console.log('value update', value, this.props.type);
+
+    if (this.props.type === 'number') {
+      value = +value ?? 0;
       value = Math.max(
         +this.props.min,
         Math.min(+this.props.max, value)
       );
-  
-      
     }
-    
+
     this.setState({
-      value: value || '',
+      value: value,
     });
 
-    if (value !== 0) this.props.onChange(value);
+    this.inputElementRef.current.value = value;
+
+    this.props.onChange(value);
+  }
+
+  stopPropagation(e) {
+    console.log('stop propagation', e);
+    e.nativeEvent.stopPropagation();
+  }
+
+  componentDidMount() {
+    const inputElement = this.inputElementRef.current;
+    
+    inputElement.addEventListener('change', (e) => this.handleChange(e));
+    inputElement.addEventListener('keydown', (e) => this.handleKeyDown(e));
+    inputElement.addEventListener('keyup', (e) => this.handleKeyUp(e));
+    inputElement.addEventListener('focusout', (e) => this.handleFocusOut(e));
   }
 
   render() {
@@ -129,15 +143,16 @@ class Textbox extends React.Component {
           id={this.props.id}
           name={this.props.name}
           type={type}
-          value={this.state.value}
+          defaultValue={this.state.value}
           disabled={this.props.isDisabled}
           placeholder={this.props.placeholder}
           list={this.props.list}
-          ref={this.inputElement}
+          ref={this.inputElementRef}
           
-          onChange={this.handleChange}
-          onKeyDown={this.handleKeyDown}
-          onKeyUp={this.handleKeyUp}
+          //onChange={this.handleChange}
+          //onKeyDown={this.handleKeyDown}
+          //onKeyUp={this.handleKeyUp}
+          onClick={this.stopPropagation}
 
           step={this.props.step}
           min={this.props.min}
@@ -147,12 +162,13 @@ class Textbox extends React.Component {
         {type == 'number' &&
           <span className="spin-button">
             <span className={`spin-up ${this.state.spinUpPressed ? " pressed" : ""}`} 
-                  onMouseDown={this.handleSpinUp}>
+                  onMouseDown={this.handleSpinUp.bind(this)}>
               <span>
                 <SpinUpIcon />
               </span>
             </span>
-            <span className={`spin-down ${this.state.spinDownPressed ? " pressed" : ""}`} onMouseDown={this.handleSpinDown}>
+            <span className={`spin-down ${this.state.spinDownPressed ? " pressed" : ""}`}
+                  onMouseDown={this.handleSpinDown.bind(this)}>
               <span>
                 <SpinDownIcon />
               </span>

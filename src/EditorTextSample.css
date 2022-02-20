@@ -4,6 +4,13 @@
   padding-right: var(--scale-16);
   overflow: hidden;
 }
+.editor-text-sample-wrapper {
+  --offset: calc(var(--scale-32) * 2);
+
+  display: block;
+  padding-top: var(--offset);
+  margin-top: calc(var(--offset) * -1);
+}
 
 .editor-ruler {
   display: grid;

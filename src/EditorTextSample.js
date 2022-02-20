@@ -2,12 +2,16 @@ import React from 'react';
 import * as helpers from './helpers';
 import './EditorTextSample.css';
 
+
+let lastFocusTime;
+
 class EditorTextSample extends React.Component {
 
   constructor(props) {
     super(props);
     this.textareaRef = React.createRef();
     this.hoverLineRef = React.createRef();
+    this.containerRef = React.createRef();
 
     this.textSampleOrder = 8;
 
@@ -59,6 +63,14 @@ class EditorTextSample extends React.Component {
     this.hoverLineRef.current.style.display = 'none';
   }
 
+  componentDidUpdate() {
+    // window.setTimeout(() => {
+    //   if (this.containerRef.current.contains(document.activeElement)) return;
+
+    //   this.textareaRef.current.focus()
+    // }, 100);
+  }
+
   render() {
     this.fontSize = (this.props.fontSize / this.props.config.baseFont) + 'rem';
     this.lineHeight = 'calc(' + this.props.lineHeight + ' / ' + this.props.fontSize + ')';
@@ -72,6 +84,7 @@ class EditorTextSample extends React.Component {
 
     return (
       <div
+        ref={this.containerRef}
         className="editor-text-sample"
         style={{
           '--sample-font-size': this.fontSize,
@@ -92,7 +105,8 @@ class EditorTextSample extends React.Component {
             autoCorrect="off"
             ref={this.textareaRef}
             onChange={this.handleChange}
-            value={this.state.value} />
+            value={this.state.value}
+            />
         </div>
       </div>
     );
